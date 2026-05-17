@@ -1,0 +1,129 @@
+body {
+  margin: 0;
+  background: linear-gradient(180deg, #f8fbff 0%, #ffffff 100%);
+  color: #0f172a;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+.options-shell {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 32px 20px 48px;
+}
+
+.eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #2563eb;
+}
+
+.hero h1 {
+  margin: 14px 0 0;
+  font-size: 40px;
+  line-height: 1.1;
+}
+
+.hero p {
+  margin: 14px 0 0;
+  max-width: 640px;
+  font-size: 15px;
+  line-height: 1.8;
+  color: #64748b;
+}
+
+.panel {
+  margin-top: 24px;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 24px 55px rgba(15, 23, 42, 0.08);
+  padding: 20px;
+}
+
+.field {
+  display: block;
+}
+
+.field + .field {
+  margin-top: 14px;
+}
+
+.field span {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.field input {
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 8px;
+  border: 1px solid rgba(203, 213, 225, 0.9);
+  border-radius: 18px;
+  padding: 14px 16px;
+  font-size: 14px;
+  color: #0f172a;
+}
+
+.button-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.primary-button,
+.secondary-button {
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 16px;
+  padding: 13px 16px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.primary-button {
+  background: #0f62fe;
+  color: white;
+  box-shadow: 0 18px 40px rgba(15, 98, 254, 0.22);
+}
+
+.secondary-button {
+  background: #eff6ff;
+  color: #0f172a;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+}
+
+.note {
+  margin-top: 16px;
+  border-radius: 18px;
+  background: #f8fbff;
+  padding: 14px 16px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #475569;
+}
+
+.message {
+  margin-top: 14px;
+  border-radius: 18px;
+  background: #eff6ff;
+  padding: 14px 16px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #1d4ed8;
+}
+
+.message.error {
+  background: #fff1f2;
+  color: #be123c;
+}
+
+.hidden {
+  display: none;
+}

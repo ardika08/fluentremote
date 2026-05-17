@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FluentRemote Options</title>
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <main class="options-shell">
+      <section class="hero">
+        <div class="eyebrow">FluentRemote extension</div>
+        <h1>Connection settings</h1>
+        <p>Point the extension to your deployed web app, paste the same license key, then sync again when your dashboard configuration changes.</p>
+      </section>
+
+      <section class="panel">
+        <label class="field">
+          <span>Backend URL</span>
+          <input id="backendUrl" type="url" placeholder="https://your-domain.com" />
+        </label>
+
+        <label class="field">
+          <span>License key</span>
+          <input id="licenseKey" type="text" placeholder="FLR-XXXX-XXXX-XXXX-XXXX" />
+        </label>
+
+        <div class="button-row">
+          <button id="saveButton" class="primary-button" type="button">Save settings</button>
+          <button id="syncButton" class="secondary-button" type="button">Sync now</button>
+        </div>
+
+        <div class="note">
+          This page is for advanced or development setup only. Normal users only need the license key in the popup. API keys stay in the web dashboard.
+        </div>
+
+        <div id="message" class="message hidden"></div>
+      </section>
+    </main>
+
+    <script src="options.js" type="module"></script>
+  </body>
+  </html>

@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FluentRemote</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main class="popup-shell">
+      <section class="popup-header">
+        <div class="brand-row">
+          <img src="icons/icon48.png" alt="FluentRemote" class="brand-icon" />
+          <div class="eyebrow">FluentRemote</div>
+        </div>
+        <h1>Activate extension</h1>
+        <p>Paste your license key, then sync the translation setup stored in your web dashboard.</p>
+      </section>
+
+      <section class="card">
+        <label class="field">
+          <span>License key</span>
+          <input id="licenseKey" type="password" placeholder="FLR-XXXX-XXXX-XXXX-XXXX" />
+        </label>
+        <div class="note">
+          Your license key can be found in the <strong>Settings</strong> menu on FluentRemote Web.
+        </div>
+        <div class="button-row">
+          <button id="syncButton" class="primary-button" type="button">Sync extension</button>
+          <button id="openSettingsButton" class="secondary-button" type="button">Open web settings</button>
+        </div>
+        <div id="message" class="message hidden"></div>
+      </section>
+
+      <section id="statusCard" class="card hidden">
+        <div class="status-row">
+          <div>
+            <div class="label">License status</div>
+            <div id="licenseStatus" class="value">Active</div>
+          </div>
+          <div class="pill" id="providerPill">OpenAI</div>
+        </div>
+
+        <div class="sync-grid">
+          <div class="sync-tile">
+            <div class="tile-head">
+              <div class="label">Language pair</div>
+              <button id="swapLanguagesButton" class="ghost-button" type="button">Switch</button>
+            </div>
+            <div id="languagePair" class="value">Indonesian → English</div>
+          </div>
+          <div class="sync-tile">
+            <div class="label">Provider keys</div>
+            <div id="providerReady" class="value">Ready</div>
+          </div>
+        </div>
+
+        <div class="notice">
+          Highlight text on any chat page to trigger the translation tooltip. API keys stay in the web dashboard.
+        </div>
+
+        <div class="button-column">
+          <button id="openGuideButton" class="secondary-button" type="button">Open install guide</button>
+        </div>
+      </section>
+
+      <footer class="popup-footer">Created by Ardika Yudha</footer>
+    </main>
+
+    <script src="popup.js" type="module"></script>
+  </body>
+</html>
