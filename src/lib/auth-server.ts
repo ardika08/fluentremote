@@ -2,7 +2,14 @@ import { headers } from "next/headers";
 
 import { auth } from "@/lib/auth";
 
-export const ADMIN_EMAIL = "ardika.yudha08@gmail.com";
+function getAdminEmails() {
+  return new Set(
+    (process.env.ADMIN_EMAILS ?? "")
+      .split(",")
+      .map((email) => email.trim().toLowerCase())
+      .filter(Boolean),
+  );
+}
 
 export async function getServerSession() {
   try {
@@ -15,7 +22,11 @@ export async function getServerSession() {
 }
 
 export function isAdminEmail(email: string | null | undefined) {
-  return email?.toLowerCase() === ADMIN_EMAIL;
+  if (!email) {
+    return false;
+  }
+
+  return getAdminEmails().has(email.toLowerCase());
 }
 
 export async function isAdminSession() {

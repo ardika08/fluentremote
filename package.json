@@ -2,9 +2,13 @@
   "name": "fluentremote-web",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=20.9.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "deploy:check": "npm run lint && npm run build",
     "start": "next start",
     "lint": "eslint",
     "extension:package": "powershell -NoProfile -Command \"if (Test-Path extension-package.zip) { Remove-Item extension-package.zip -Force }; Compress-Archive -Path extension\\* -DestinationPath extension-package.zip\"",

@@ -33,6 +33,7 @@ DATABASE_SSL=auto
 BETTER_AUTH_SECRET=
 BETTER_AUTH_URL=http://localhost:3000
 FLUENTREMOTE_ENCRYPTION_SECRET=
+ADMIN_EMAILS=
 GOOGLE_CLIENT_ID=
 GOOGLE_CLIENT_SECRET=
 MAYAR_API_KEY=
@@ -58,6 +59,7 @@ Useful commands:
 ```powershell
 npm run lint
 npm run build
+npm run deploy:check
 npm run db:check
 npm run extension:package
 ```
@@ -138,16 +140,68 @@ One reason to use Supabase here is that you can inspect your production data fro
 - SQL Editor for direct queries
 - dashboard-based backups and database management
 
-## Deployment Notes
+## Deployment Target
 
-- Put the same Supabase `DATABASE_URL` and `DATABASE_SSL=auto` into your hosting provider environment variables.
-- Keep `BETTER_AUTH_URL` pointed to your production domain.
-- Keep `FLUENTREMOTE_ENCRYPTION_SECRET`, Google OAuth, Mayar, and provider API variables set in production.
-- After deploy, verify:
-  - sign in works
-  - Google OAuth callback works
-  - Mayar webhook reaches the deployed app
-  - `/settings` loads without database errors
+Recommended target: Vercel.
+
+Why this target fits this repo:
+
+- Next.js 16 is supported natively on Vercel.
+- The app uses auth, route handlers, and payment webhooks, so it needs a full server deployment rather than a static export.
+- GitHub import gives the fastest path from this repository to repeatable production deploys.
+
+### Vercel setup
+
+1. Import the GitHub repository into Vercel.
+2. Keep the detected framework as `Next.js`.
+3. Use Node.js `20.9+` or newer.
+4. Add production environment variables before the first deploy.
+5. Set the production domain, then update OAuth and auth callback URLs to match it.
+
+Production environment checklist:
+
+```env
+DATABASE_URL=
+DATABASE_SSL=auto
+BETTER_AUTH_SECRET=
+BETTER_AUTH_URL=https://your-domain.example
+FLUENTREMOTE_ENCRYPTION_SECRET=
+ADMIN_EMAILS=admin@example.com
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+MAYAR_API_KEY=
+MAYAR_WEBHOOK_TOKEN=
+MAYAR_BASE_URL=https://api.mayar.id/hl/v1
+MAYAR_PRICE_AMOUNT=99000
+MAYAR_CURRENCY=IDR
+MAYAR_PRODUCT_DESCRIPTION=FluentRemote lifetime access
+OPENAI_API_KEY=
+OPENAI_TRANSLATION_MODEL=gpt-4o-mini
+MAIA_ROUTER_API_KEY=
+MAIA_ROUTER_BASE_URL=https://api.maiarouter.ai/v1
+MAIA_ROUTER_MODEL=maia/gemini-2.5-flash
+```
+
+### Pre-deploy check
+
+Run this locally before pushing deployment-related changes:
+
+```powershell
+npm run deploy:check
+```
+
+### Post-deploy verification
+
+- Sign in with email/password works.
+- Google OAuth callback returns to the production domain.
+- `/settings` loads without database errors.
+- Checkout can create a Mayar order.
+- Mayar webhook can reach `/api/payments/mayar/webhook`.
+- Extension-connected endpoints still work against the deployed backend.
+
+### Security note
+
+The previous `.env.example` contained real-looking secrets and has now been sanitized. Those credentials should be rotated in their respective providers because they were already committed once.
 
 ## Extension
 
