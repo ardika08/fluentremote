@@ -29,7 +29,9 @@ async function loadOptions() {
   }
 
   backendUrlInput.value = response.data.backendUrl || "http://localhost:3000";
-  licenseKeyInput.value = response.data.licenseKey || "";
+  licenseKeyInput.value = response.data.licenseKey
+    ? maskLicenseKey(response.data.licenseKey)
+    : "";
 }
 
 async function saveOptions() {

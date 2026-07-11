@@ -79,35 +79,15 @@ async function loadStoredSettings() {
 async function loadPopup() {
   try {
     const settings = await loadStoredSettings();
-    licenseKeyInput.value = settings.licenseKey || "";
-    renderSyncedConfig(settings.syncedConfig);
-
+    // Show masked key — never expose raw license key in UI
     if (settings.licenseKey) {
       licenseKeyInput.value = maskLicenseKey(settings.licenseKey);
       licenseKeyInput.dataset.hasStoredKey = "true";
-      const syncResponse = await chrome.runtime.sendMessage({
-        type: "FLUENTREMOTE_SYNC",
-      });
-
-      if (syncResponse?.ok) {
-        renderSyncedConfig(syncResponse.data);
-      } else {
-        const syncMessage = syncResponse?.message || "Unable to sync extension.";
-        if (
-          syncMessage.includes("not valid") ||
-          syncMessage.includes("revoked") ||
-          syncMessage.includes("not attached")
-        ) {
-          resetLicenseFieldForResync();
-          showMessage(
-            "Your stored license key is no longer valid. Copy the latest license key from FluentRemote Web Settings, then sync again.",
-            "error",
-          );
-        } else {
-          showMessage(syncMessage, "error");
-        }
-      }
+    } else {
+      licenseKeyInput.value = "";
     }
+    // Render cached config immediately — no network call on open
+    renderSyncedConfig(settings.syncedConfig);
   } catch (error) {
     showMessage(
       error instanceof Error ? error.message : "Unable to load extension settings.",

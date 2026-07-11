@@ -41,3 +41,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# drizzle migration snapshots — generated, no need to track
+drizzle/meta/*.json

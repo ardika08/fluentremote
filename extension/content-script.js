@@ -329,23 +329,31 @@ function showActionPill(rect, canReplace) {
 
   pill.addEventListener("click", async () => {
     showMessageTooltip("Translating...", { title: "FluentRemote" });
-    const response = await chrome.runtime.sendMessage({
-      type: "FLUENTREMOTE_TRANSLATE",
-      payload: {
-        text: STATE.selectedText,
-        mode: canReplace ? "write" : "read",
-      },
-    });
 
-    if (!response?.ok) {
-      showMessageTooltip(response?.message || "Unable to translate right now.", {
-        title: "Action required",
-        tone: "warning",
+    try {
+      const response = await chrome.runtime.sendMessage({
+        type: "FLUENTREMOTE_TRANSLATE",
+        payload: {
+          text: STATE.selectedText,
+          mode: canReplace ? "write" : "read",
+        },
       });
-      return;
-    }
 
-    showTranslationTooltip(response.data.translatedText, canReplace);
+      if (!response?.ok) {
+        showMessageTooltip(response?.message || "Unable to translate right now.", {
+          title: "Action required",
+          tone: "warning",
+        });
+        return;
+      }
+
+      showTranslationTooltip(response.data.translatedText, canReplace);
+    } catch (err) {
+      showMessageTooltip(
+        err instanceof Error ? err.message : "Unable to translate right now.",
+        { title: "Error", tone: "warning" },
+      );
+    }
   });
 
   document.body.appendChild(pill);

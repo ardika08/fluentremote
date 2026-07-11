@@ -4,6 +4,8 @@ import type { PoolConfig } from "pg";
 
 import * as schema from "@/db/schema";
 
+// Default is only used when DATABASE_URL env is not set (local dev without DB).
+// The app degrades gracefully via isDatabaseConfigured() checks.
 const DEFAULT_DATABASE_URL =
   "postgresql://postgres:postgres@localhost:5432/fluentremote";
 const DEFAULT_DATABASE_SSL = "auto";
