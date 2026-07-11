@@ -28,10 +28,14 @@ const DEFAULT_PREFERENCES: LanguagePreference = {
 };
 
 function baseCookieOptions() {
+  const isProduction = process.env.NODE_ENV === "production";
   return {
+    // httpOnly: false — cookies must be readable by the extension content script
+    // running on the same domain. Extension access requires non-httpOnly cookies.
     httpOnly: false,
     sameSite: "lax" as const,
-    secure: false,
+    // Enforce Secure in production so cookies are only sent over HTTPS
+    secure: isProduction,
     path: "/",
     maxAge: COOKIE_MAX_AGE,
   };

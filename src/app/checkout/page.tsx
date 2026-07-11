@@ -24,7 +24,7 @@ export default async function CheckoutPage() {
   const pricing = getMayarPricing(locale);
 
   const copy = {
-    eyebrow: isId ? "Checkout" : "Checkout",
+    eyebrow: "Checkout",
     title: isId
       ? "Selesaikan pembelian FluentRemote untuk membuka lisensi dan setup extension."
       : "Complete your FluentRemote purchase to unlock your license and extension setup.",
@@ -45,13 +45,12 @@ export default async function CheckoutPage() {
           "A live translation test from frontend to backend.",
         ],
     liveTitle: isId ? "Checkout Mayar" : "Mayar checkout",
+    // Invoice API: name & email diambil dari akun — tidak perlu input nomor HP
     liveDescription: isId
-      ? "Masukkan nomor handphone yang akan dipakai di invoice Mayar, lalu Anda akan diarahkan ke halaman pembayaran hosted checkout Mayar."
-      : "Enter the mobile number that should appear on the Mayar invoice, then you will be redirected to Mayar's hosted checkout page.",
-    mobileLabel: isId ? "Nomor handphone" : "Mobile number",
-    mobilePlaceholder: isId ? "08xxxxxxxxxx" : "08xxxxxxxxxx",
+      ? "Klik tombol di bawah untuk membuat invoice Mayar. Detail akun Anda (nama & email) akan dipakai otomatis, lalu Anda diarahkan ke halaman pembayaran Mayar."
+      : "Click the button below to generate a Mayar invoice. Your account details (name & email) are used automatically, then you will be redirected to Mayar's payment page.",
     liveAction: isId ? "Lanjut ke pembayaran Mayar" : "Continue to Mayar payment",
-    liveProcessing: isId ? "Membuka checkout Mayar" : "Opening Mayar checkout",
+    liveProcessing: isId ? "Membuat invoice Mayar..." : "Creating Mayar invoice...",
     alreadyOwned: isId
       ? "Akun ini sudah memiliki akses FluentRemote. Anda bisa langsung membuka Settings."
       : "This account already has FluentRemote access. You can go straight to Settings.",
@@ -60,10 +59,12 @@ export default async function CheckoutPage() {
     latestPending: isId ? "Menunggu pembayaran" : "Awaiting payment",
     latestPaid: isId ? "Sudah dibayar" : "Paid",
     paymentPipelineEyebrow: isId ? "Gateway asli" : "Live gateway",
-    paymentPipelineTitle: isId ? "Mayar menangani pembayaran, webhook, dan redirect." : "Mayar handles payment, webhook, and redirect.",
+    paymentPipelineTitle: isId
+      ? "Mayar menangani pembayaran, webhook, dan redirect."
+      : "Mayar handles payment, webhook, and redirect.",
     paymentPipelineDescription: isId
-      ? "Link pembayaran dibuat real-time melalui API Mayar. Setelah status dibayar diterima, license unik langsung ditautkan ke akun login yang sama."
-      : "The payment link is created in real time through the Mayar API. Once a paid status is received, a unique license is linked to the same signed-in account immediately.",
+      ? "Invoice dibuat real-time via Mayar Invoice API. Setelah status dibayar diterima, license unik langsung ditautkan ke akun login yang sama."
+      : "The invoice is created in real time via the Mayar Invoice API. Once a paid status is received, a unique license is linked to the same signed-in account immediately.",
   };
 
   return (
@@ -103,8 +104,6 @@ export default async function CheckoutPage() {
                 <MayarCheckoutButton
                   title={copy.liveTitle}
                   description={copy.liveDescription}
-                  mobileLabel={copy.mobileLabel}
-                  mobilePlaceholder={copy.mobilePlaceholder}
                   actionLabel={copy.liveAction}
                   processingLabel={copy.liveProcessing}
                 />

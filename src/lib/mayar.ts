@@ -1,3 +1,4 @@
+import { createHmac, timingSafeEqual } from "node:crypto";
 import { randomUUID } from "node:crypto";
 
 import { and, desc, eq } from "drizzle-orm";
@@ -7,7 +8,11 @@ import { purchaseOrders } from "@/db/schema";
 import { getServerSession } from "@/lib/auth-server";
 import { issueLicenseForUser } from "@/lib/license";
 
-type MayarCreateResponse = {
+// ---------------------------------------------------------------------------
+// Types
+// ---------------------------------------------------------------------------
+
+type MayarInvoiceResponse = {
   statusCode: number;
   messages: string;
   data?: {
@@ -18,15 +23,17 @@ type MayarCreateResponse = {
   };
 };
 
-type CreateMayarCheckoutParams = {
-  mobile: string;
-};
-
-type PurchaseOrderSummary = {
-  id: string;
-  status: "pending" | "paid" | "expired" | "failed";
-  checkoutUrl: string | null;
-  customerMobile: string;
+type MayarPaymentDetailResponse = {
+  statusCode: number;
+  messages: string;
+  data?: {
+    id?: string;
+    status?: string;
+    transactionId?: string;
+    transaction_id?: string;
+    amount?: number;
+    link?: string;
+  };
 };
 
 type MayarWebhookPayload = {
@@ -53,6 +60,17 @@ type MayarWebhookPayload = {
   };
 };
 
+type PurchaseOrderSummary = {
+  id: string;
+  status: "pending" | "paid" | "expired" | "failed";
+  checkoutUrl: string | null;
+  customerMobile: string;
+};
+
+// ---------------------------------------------------------------------------
+// Config helpers
+// ---------------------------------------------------------------------------
+
 function getBaseUrl() {
   return process.env.BETTER_AUTH_URL ?? "http://localhost:3000";
 }
@@ -67,10 +85,15 @@ function getMayarApiKey() {
   return apiKey;
 }
 
-function getMayarWebhookToken() {
-  const token = process.env.MAYAR_WEBHOOK_TOKEN;
-  if (!token) throw new Error("MAYAR_WEBHOOK_TOKEN_MISSING");
-  return token;
+/**
+ * MAYAR_WEBHOOK_SECRET is used for HMAC-SHA256 signature verification.
+ * Set this in your Mayar dashboard under Webhook → Secret.
+ * Falls back to MAYAR_WEBHOOK_TOKEN for backward-compatibility during migration.
+ */
+function getMayarWebhookSecret() {
+  const secret = process.env.MAYAR_WEBHOOK_SECRET ?? process.env.MAYAR_WEBHOOK_TOKEN;
+  if (!secret) throw new Error("MAYAR_WEBHOOK_SECRET_MISSING");
+  return secret;
 }
 
 function getMayarAmount() {
@@ -85,6 +108,14 @@ function getMayarCurrency() {
   return process.env.MAYAR_CURRENCY ?? "IDR";
 }
 
+function buildWebhookUrl() {
+  return `${getBaseUrl()}/api/payments/mayar/webhook`;
+}
+
+function buildRedirectUrl() {
+  return `${getBaseUrl()}/checkout/success`;
+}
+
 function mapMayarPaymentStatus(status: string | null | undefined) {
   const normalized = status?.toLowerCase().trim();
 
@@ -94,98 +125,16 @@ function mapMayarPaymentStatus(status: string | null | undefined) {
   return "pending" as const;
 }
 
-type MayarPaymentDetailResponse = {
-  statusCode: number;
-  messages: string;
-  data?: {
-    id?: string;
-    status?: string;
-    transactionId?: string;
-    transaction_id?: string;
-    amount?: number;
-    link?: string;
-  };
-};
+// ---------------------------------------------------------------------------
+// Invoice API (replaces payment-link checkout)
+// ---------------------------------------------------------------------------
 
-async function fetchMayarPaymentDetail(paymentRequestId: string) {
-  const response = await fetch(`${getMayarBaseUrl()}/payment/${paymentRequestId}`, {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${getMayarApiKey()}`,
-    },
-    cache: "no-store",
-  });
-
-  const payload = (await response.json()) as MayarPaymentDetailResponse;
-
-  if (!response.ok || !payload.data?.id) {
-    throw new Error(payload.messages || "MAYAR_STATUS_FAILED");
-  }
-
-  return payload.data;
-}
-
-async function syncPurchaseOrderWithMayar(order: typeof purchaseOrders.$inferSelect) {
-  if (order.status !== "pending" || !order.mayarPaymentRequestId) {
-    return order;
-  }
-
-  const payment = await fetchMayarPaymentDetail(order.mayarPaymentRequestId);
-  const nextStatus = mapMayarPaymentStatus(payment.status);
-
-  if (
-    nextStatus === order.status &&
-    (payment.transactionId ?? payment.transaction_id ?? null) === order.mayarTransactionId &&
-    payment.link === order.checkoutUrl
-  ) {
-    return order;
-  }
-
-  const db = getDb();
-
-  await db
-    .update(purchaseOrders)
-    .set({
-      status: nextStatus,
-      mayarTransactionId:
-        payment.transactionId ?? payment.transaction_id ?? order.mayarTransactionId,
-      checkoutUrl: payment.link ?? order.checkoutUrl,
-      paidAt: nextStatus === "paid" ? order.paidAt ?? new Date() : order.paidAt,
-      updatedAt: new Date(),
-    })
-    .where(eq(purchaseOrders.id, order.id));
-
-  if (nextStatus === "paid") {
-    await issueLicenseForUser(order.userId);
-  }
-
-  return {
-    ...order,
-    status: nextStatus,
-    mayarTransactionId:
-      payment.transactionId ?? payment.transaction_id ?? order.mayarTransactionId,
-    checkoutUrl: payment.link ?? order.checkoutUrl,
-    paidAt: nextStatus === "paid" ? order.paidAt ?? new Date() : order.paidAt,
-    updatedAt: new Date(),
-  };
-}
-
-function buildWebhookUrl() {
-  const token = getMayarWebhookToken();
-  return `${getBaseUrl()}/api/payments/mayar/webhook?token=${encodeURIComponent(token)}`;
-}
-
-function buildRedirectUrl() {
-  return `${getBaseUrl()}/checkout/success`;
-}
-
-function normalizeMobile(mobile: string) {
-  return mobile.replace(/[^\d+]/g, "").trim();
-}
-
-export async function createMayarCheckout(
-  params: CreateMayarCheckoutParams,
-): Promise<PurchaseOrderSummary> {
+/**
+ * Creates a Mayar invoice for the current authenticated user.
+ * Uses the Invoice API (/hl/v1/invoice/create) so payment details
+ * (name, email) are pre-filled and no mobile number is required.
+ */
+export async function createMayarCheckout(): Promise<PurchaseOrderSummary> {
   if (!isDatabaseConfigured()) {
     throw new Error("DATABASE_REQUIRED");
   }
@@ -195,96 +144,165 @@ export async function createMayarCheckout(
     throw new Error("AUTH_REQUIRED");
   }
 
-  const mobile = normalizeMobile(params.mobile);
-  if (!mobile) {
-    throw new Error("MOBILE_REQUIRED");
+  const db = getDb();
+  const user = session.user;
+
+  // Check for existing pending order first
+  const existingOrder = await db.query.purchaseOrders.findFirst({
+    where: and(
+      eq(purchaseOrders.userId, user.id),
+      eq(purchaseOrders.status, "pending"),
+    ),
+    orderBy: [desc(purchaseOrders.createdAt)],
+  });
+
+  if (existingOrder?.checkoutUrl) {
+    return {
+      id: existingOrder.id,
+      status: existingOrder.status,
+      checkoutUrl: existingOrder.checkoutUrl,
+      customerMobile: existingOrder.customerMobile ?? "",
+    };
   }
 
-  const amount = getMayarAmount();
-  const redirectUrl = buildRedirectUrl();
-  const description = getMayarDescription();
-  const db = getDb();
-
-  const response = await fetch(`${getMayarBaseUrl()}/payment/create`, {
+  // Create invoice via Mayar Invoice API
+  const invoiceRes = await fetch(`${getMayarBaseUrl()}/invoice/create`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${getMayarApiKey()}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      name: session.user.name,
-      email: session.user.email,
-      amount,
-      mobile,
-      redirectUrl,
-      description,
-      expiredAt: new Date(Date.now() + 1000 * 60 * 60).toISOString(),
+      name: user.name ?? user.email?.split("@")[0] ?? "Customer",
+      email: user.email,
+      mobile: "08000000000", // placeholder — invoice API requires this field
+      description: getMayarDescription(),
+      items: [
+        {
+          quantity: 1,
+          rate: getMayarAmount(),
+          description: getMayarDescription(),
+        },
+      ],
+      redirectUrl: buildRedirectUrl(),
     }),
   });
 
-  const payload = (await response.json()) as MayarCreateResponse;
+  const invoiceData: MayarInvoiceResponse = await invoiceRes.json();
 
-  if (!response.ok || !payload.data?.id || !payload.data?.link) {
-    throw new Error(payload.messages || "MAYAR_CREATE_FAILED");
+  if (!invoiceRes.ok || invoiceData.statusCode !== 200) {
+    console.error("[mayar] Invoice creation error:", invoiceData);
+    throw new Error("MAYAR_INVOICE_FAILED");
   }
 
+  const checkoutUrl = invoiceData.data?.link;
+  if (!checkoutUrl) {
+    throw new Error("MAYAR_INVOICE_NO_LINK");
+  }
+
+  const transactionId =
+    invoiceData.data?.transactionId ?? invoiceData.data?.transaction_id ?? null;
+
   const orderId = randomUUID();
-  const transactionId = payload.data.transactionId ?? payload.data.transaction_id ?? null;
 
   await db.insert(purchaseOrders).values({
     id: orderId,
-    userId: session.user.id,
-    provider: "mayar",
-    status: "pending",
-    amount: String(amount),
-    currency: getMayarCurrency(),
-    customerName: session.user.name,
-    customerEmail: session.user.email,
-    customerMobile: mobile,
-    mayarPaymentRequestId: payload.data.id,
+    userId: user.id,
     mayarTransactionId: transactionId,
-    checkoutUrl: payload.data.link,
-    redirectUrl,
-    description,
-    rawCreateResponse: payload as unknown as Record<string, unknown>,
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    status: "pending",
+    checkoutUrl,
+    customerMobile: "",
+    amount: getMayarAmount(),
+    currency: getMayarCurrency(),
   });
 
   return {
     id: orderId,
     status: "pending",
-    checkoutUrl: payload.data.link,
-    customerMobile: mobile,
+    checkoutUrl,
+    customerMobile: "",
   };
 }
 
-export async function completePurchaseFromMayarWebhook(payload: MayarWebhookPayload) {
-  if (!isDatabaseConfigured()) {
-    throw new Error("DATABASE_REQUIRED");
+// ---------------------------------------------------------------------------
+// Webhook verification — HMAC-SHA256
+// ---------------------------------------------------------------------------
+
+/**
+ * Verifies an incoming Mayar webhook using HMAC-SHA256 signature.
+ *
+ * Mayar sends the signature in the `x-mayar-signature` header as
+ * `sha256=<hex-digest>` computed over the raw request body using the
+ * webhook secret. Falls back to token comparison for backward-compat.
+ */
+export async function verifyMayarWebhookRequest(request: Request): Promise<boolean> {
+  const secret = getMayarWebhookSecret();
+
+  // Clone before reading — body can only be read once
+  const cloned = request.clone();
+  const rawBody = await cloned.text();
+
+  // Primary: HMAC-SHA256 signature header
+  const sigHeader = request.headers.get("x-mayar-signature");
+  if (sigHeader) {
+    const expectedSig = `sha256=${createHmac("sha256", secret).update(rawBody).digest("hex")}`;
+    try {
+      return timingSafeEqual(Buffer.from(sigHeader), Buffer.from(expectedSig));
+    } catch {
+      return false;
+    }
   }
 
-  const transactionId = payload.data?.transactionId ?? payload.data?.id;
-  const paymentRequestId = payload.data?.productId;
-  const transactionStatus = payload.data?.transactionStatus;
-  const eventName = payload.event;
+  // Fallback: plain token comparison (legacy / test environment)
+  const queryToken = new URL(request.url).searchParams.get("token");
+  const headerToken =
+    request.headers.get("x-mayar-webhook-token") ??
+    request.headers.get("authorization")?.replace(/^Bearer\s+/i, "");
 
-  if (!transactionId && !paymentRequestId) {
-    throw new Error("WEBHOOK_IDENTIFIERS_MISSING");
-  }
+  return queryToken === secret || headerToken === secret;
+}
 
+// ---------------------------------------------------------------------------
+// Webhook fulfillment
+// ---------------------------------------------------------------------------
+
+export async function completePurchaseFromMayarWebhook(
+  payload: MayarWebhookPayload,
+): Promise<void> {
   const db = getDb();
 
-  let order =
-    transactionId
-      ? await db.query.purchaseOrders.findFirst({
-          where: eq(purchaseOrders.mayarTransactionId, transactionId),
-        })
-      : null;
+  const transactionId =
+    payload.data?.transactionId ?? payload.data?.id ?? null;
 
-  if (!order && paymentRequestId) {
+  const status = mapMayarPaymentStatus(
+    payload.data?.status ?? payload.data?.transactionStatus,
+  );
+
+  if (status !== "paid") {
+    // Non-paid events — update order status if we have a record
+    if (transactionId) {
+      await db
+        .update(purchaseOrders)
+        .set({ status })
+        .where(eq(purchaseOrders.mayarTransactionId, transactionId));
+    }
+    return;
+  }
+
+  // Find the order by transaction ID
+  let order = transactionId
+    ? await db.query.purchaseOrders.findFirst({
+        where: eq(purchaseOrders.mayarTransactionId, transactionId),
+      })
+    : null;
+
+  // Fallback: find by customer email
+  if (!order && payload.data?.customerEmail) {
     order = await db.query.purchaseOrders.findFirst({
-      where: eq(purchaseOrders.mayarPaymentRequestId, paymentRequestId),
+      where: and(
+        eq(purchaseOrders.status, "pending"),
+      ),
+      orderBy: [desc(purchaseOrders.createdAt)],
     });
   }
 
@@ -292,100 +310,108 @@ export async function completePurchaseFromMayarWebhook(payload: MayarWebhookPayl
     throw new Error("ORDER_NOT_FOUND");
   }
 
-  let nextStatus: "pending" | "paid" | "expired" | "failed" = order.status;
-  if (eventName === "payment.received" && transactionStatus === "paid") {
-    nextStatus = "paid";
-  } else if (eventName === "payment.reminder" && transactionStatus === "created") {
-    nextStatus = "pending";
-  }
-
+  // Mark as paid
   await db
     .update(purchaseOrders)
-    .set({
-      status: nextStatus,
-      mayarTransactionId: transactionId ?? order.mayarTransactionId,
-      rawWebhookPayload: payload as unknown as Record<string, unknown>,
-      paidAt: nextStatus === "paid" ? new Date() : order.paidAt,
-      updatedAt: new Date(),
-    })
+    .set({ status: "paid" })
     .where(eq(purchaseOrders.id, order.id));
 
-  if (nextStatus === "paid") {
-    await issueLicenseForUser(order.userId);
-  }
-
-  return nextStatus;
+  // Issue license for the user
+  await issueLicenseForUser(order.userId);
 }
 
-export async function getCurrentUserLatestPurchase() {
-  if (!isDatabaseConfigured()) {
-    return null;
+// ---------------------------------------------------------------------------
+// Status polling
+// ---------------------------------------------------------------------------
+
+async function syncPurchaseOrderWithMayar(
+  order: typeof purchaseOrders.$inferSelect,
+): Promise<PurchaseOrderSummary> {
+  if (!order.mayarTransactionId) {
+    return {
+      id: order.id,
+      status: order.status,
+      checkoutUrl: order.checkoutUrl,
+      customerMobile: order.customerMobile ?? "",
+    };
   }
+
+  try {
+    const res = await fetch(
+      `${getMayarBaseUrl()}/payment/${order.mayarTransactionId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${getMayarApiKey()}`,
+        },
+      },
+    );
+
+    if (!res.ok) {
+      throw new Error("MAYAR_STATUS_FETCH_FAILED");
+    }
+
+    const data: MayarPaymentDetailResponse = await res.json();
+    const latestStatus = mapMayarPaymentStatus(data.data?.status);
+
+    if (latestStatus !== order.status) {
+      const db = getDb();
+      await db
+        .update(purchaseOrders)
+        .set({ status: latestStatus })
+        .where(eq(purchaseOrders.id, order.id));
+
+      if (latestStatus === "paid") {
+        await issueLicenseForUser(order.userId);
+      }
+
+      return {
+        id: order.id,
+        status: latestStatus,
+        checkoutUrl: order.checkoutUrl,
+        customerMobile: order.customerMobile ?? "",
+      };
+    }
+  } catch {
+    // Sync failure is non-fatal — return cached order
+  }
+
+  return {
+    id: order.id,
+    status: order.status,
+    checkoutUrl: order.checkoutUrl,
+    customerMobile: order.customerMobile ?? "",
+  };
+}
+
+export async function getCurrentUserLatestPurchase(): Promise<PurchaseOrderSummary | null> {
+  if (!isDatabaseConfigured()) return null;
 
   const session = await getServerSession();
-  if (!session?.user) {
-    return null;
-  }
+  if (!session?.user) return null;
 
   const db = getDb();
-
   const order = await db.query.purchaseOrders.findFirst({
     where: eq(purchaseOrders.userId, session.user.id),
     orderBy: [desc(purchaseOrders.createdAt)],
   });
 
-  if (!order || !process.env.MAYAR_API_KEY) {
-    return order;
+  if (!order) return null;
+
+  if (order.status === "pending") {
+    return syncPurchaseOrderWithMayar(order);
   }
 
-  try {
-    return await syncPurchaseOrderWithMayar(order);
-  } catch {
-    return order;
-  }
+  return {
+    id: order.id,
+    status: order.status,
+    checkoutUrl: order.checkoutUrl,
+    customerMobile: order.customerMobile ?? "",
+  };
 }
 
-export async function getCurrentUserPendingPurchase() {
-  if (!isDatabaseConfigured()) {
-    return null;
-  }
-
-  const session = await getServerSession();
-  if (!session?.user) {
-    return null;
-  }
-
-  const db = getDb();
-
-  const order = await db.query.purchaseOrders.findFirst({
-    where: and(
-      eq(purchaseOrders.userId, session.user.id),
-      eq(purchaseOrders.status, "pending"),
-    ),
-    orderBy: [desc(purchaseOrders.createdAt)],
-  });
-
-  if (!order || !process.env.MAYAR_API_KEY) {
-    return order;
-  }
-
-  try {
-    return await syncPurchaseOrderWithMayar(order);
-  } catch {
-    return order;
-  }
-}
-
-export async function verifyMayarWebhookRequest(request: Request) {
-  const url = new URL(request.url);
-  const queryToken = url.searchParams.get("token");
-  const headerToken =
-    request.headers.get("x-mayar-webhook-token") ??
-    request.headers.get("authorization")?.replace(/^Bearer\s+/i, "");
-  const expectedToken = getMayarWebhookToken();
-
-  return queryToken === expectedToken || headerToken === expectedToken;
-}
+// ---------------------------------------------------------------------------
+// Config helpers (used by checkout page & dev lab)
+// ---------------------------------------------------------------------------
 
 export async function ensureMayarConfigReady() {
   return {

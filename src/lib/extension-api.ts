@@ -56,12 +56,53 @@ async function findLicenseOwnerWorkspace(licenseKey: string) {
   };
 }
 
-export function getExtensionCorsHeaders() {
+/**
+ * Returns CORS headers for extension API routes.
+ *
+ * In production, only the extension's chrome-extension:// origin is allowed.
+ * In development, localhost is also permitted.
+ *
+ * MAYAR_WEBHOOK_SECRET is used for HMAC verification — not CORS.
+ */
+export function getExtensionCorsHeaders(): Record<string, string> {
+  const allowedOrigins = getAllowedExtensionOrigins();
+
   return {
-    "Access-Control-Allow-Origin": "*",
+    // Restrict to known extension origin(s) — not wildcard "*"
+    "Access-Control-Allow-Origin": allowedOrigins,
     "Access-Control-Allow-Methods": "POST, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type",
+    "Vary": "Origin",
   };
+}
+
+/**
+ * Builds the allowed origin string from environment config.
+ *
+ * Set EXTENSION_CHROME_ID in production to your extension's Chrome ID.
+ * Example: EXTENSION_CHROME_ID=abcdefghijklmnopqrstuvwxyz012345
+ *
+ * In development (NODE_ENV !== production) localhost is also allowed.
+ */
+function getAllowedExtensionOrigins(): string {
+  const chromeExtId = process.env.EXTENSION_CHROME_ID;
+
+  // In development, allow localhost as well
+  if (process.env.NODE_ENV !== "production") {
+    if (chromeExtId) {
+      return `chrome-extension://${chromeExtId}`;
+    }
+    return "http://localhost:3000";
+  }
+
+  // Production: require the Chrome extension ID to be set
+  if (!chromeExtId) {
+    throw new Error(
+      "EXTENSION_CHROME_ID must be set in production to restrict CORS to the extension origin.",
+    );
+  }
+
+  return `chrome-extension://${chromeExtId}`;
 }
 
 export async function getExtensionConfig(licenseKey: string) {
@@ -96,28 +137,14 @@ export async function updateExtensionPreferences(params: {
     .set({
       sourceLanguage: params.sourceLanguage,
       targetLanguage: params.targetLanguage,
-      lastActiveAt: new Date(),
-      updatedAt: new Date(),
     })
-    .where(eq(userSettings.userId, settings.userId));
-
-  const refreshed = await db.query.userSettings.findFirst({
-    where: eq(userSettings.userId, settings.userId),
-  });
+    .where(eq(userSettings.userId, license.issuedToUserId!));
 
   return {
     ok: true,
-    licenseStatus: license.status === "revoked" ? "revoked" : "active",
-    licenseKeyMasked: license.activationCodeMasked,
-    sourceLanguage: refreshed?.sourceLanguage ?? params.sourceLanguage,
-    targetLanguage: refreshed?.targetLanguage ?? params.targetLanguage,
-    aiProvider: refreshed?.aiProvider ?? settings.aiProvider,
-    hasOpenAIApiKey: Boolean(refreshed?.openaiApiKeyEncrypted),
-    hasMaiaRouterApiKey: Boolean(refreshed?.maiaRouterApiKeyEncrypted),
-    hasProviderKeys: Boolean(
-      refreshed?.openaiApiKeyEncrypted || refreshed?.maiaRouterApiKeyEncrypted,
-    ),
-    syncedAt: new Date().toISOString(),
+    sourceLanguage: params.sourceLanguage,
+    targetLanguage: params.targetLanguage,
+    aiProvider: settings.aiProvider,
   };
 }
 
@@ -127,27 +154,31 @@ export async function translateForExtension(params: {
   sourceLanguage?: string;
   targetLanguage?: string;
   aiProvider?: AIProvider;
-  mode: TranslationMode;
+  mode?: TranslationMode;
 }): Promise<TranslationResponse> {
   const { settings } = await findLicenseOwnerWorkspace(params.licenseKey);
-  const provider = params.aiProvider ?? settings.aiProvider;
-  const encryptedKey =
-    provider === "openai"
-      ? settings.openaiApiKeyEncrypted
-      : settings.maiaRouterApiKeyEncrypted;
 
-  if (!encryptedKey) {
-    throw new Error(
-      provider === "openai" ? "OPENAI_KEY_REQUIRED" : "MAIA_ROUTER_KEY_REQUIRED",
-    );
+  const sourceLanguage = params.sourceLanguage ?? settings.sourceLanguage ?? "Indonesian";
+  const targetLanguage = params.targetLanguage ?? settings.targetLanguage ?? "English";
+  const aiProvider = params.aiProvider ?? settings.aiProvider ?? "openai";
+  const mode = params.mode ?? "read";
+
+  let apiKey: string;
+
+  if (aiProvider === "openai") {
+    if (!settings.openaiApiKeyEncrypted) throw new Error("OPENAI_KEY_REQUIRED");
+    apiKey = decryptSecret(settings.openaiApiKeyEncrypted);
+  } else {
+    if (!settings.maiaRouterApiKeyEncrypted) throw new Error("MAIA_ROUTER_KEY_REQUIRED");
+    apiKey = decryptSecret(settings.maiaRouterApiKeyEncrypted);
   }
 
   return translateText({
     text: params.text,
-    sourceLanguage: params.sourceLanguage ?? settings.sourceLanguage,
-    targetLanguage: params.targetLanguage ?? settings.targetLanguage,
-    provider,
-    mode: params.mode,
-    apiKey: decryptSecret(encryptedKey),
+    sourceLanguage,
+    targetLanguage,
+    aiProvider,
+    apiKey,
+    mode,
   });
 }

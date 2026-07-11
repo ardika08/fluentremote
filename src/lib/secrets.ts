@@ -6,8 +6,13 @@ const IV_LENGTH = 12;
 function getEncryptionKey() {
   const secret =
     process.env.FLUENTREMOTE_ENCRYPTION_SECRET ??
-    process.env.BETTER_AUTH_SECRET ??
-    "fluentremote-dev-secret";
+    process.env.BETTER_AUTH_SECRET;
+
+  if (!secret) {
+    throw new Error(
+      "FLUENTREMOTE_ENCRYPTION_SECRET (or BETTER_AUTH_SECRET) must be set in environment variables.",
+    );
+  }
 
   return createHash("sha256").update(secret).digest();
 }

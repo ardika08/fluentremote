@@ -1,15 +1,10 @@
 import { NextResponse } from "next/server";
 
-import { createMayarCheckout, ensureMayarConfigReady } from "@/lib/mayar";
+import { createMayarCheckout } from "@/lib/mayar";
 
-export async function POST(request: Request) {
+export async function POST() {
   try {
-    await ensureMayarConfigReady();
-    const body = (await request.json()) as { mobile?: string };
-    const result = await createMayarCheckout({
-      mobile: body.mobile ?? "",
-    });
-
+    const result = await createMayarCheckout();
     return NextResponse.json(result);
   } catch (error) {
     if (error instanceof Error) {
@@ -17,10 +12,10 @@ export async function POST(request: Request) {
         return NextResponse.json({ message: "Sign in first." }, { status: 401 });
       }
 
-      if (error.message === "MOBILE_REQUIRED") {
+      if (error.message === "DATABASE_REQUIRED") {
         return NextResponse.json(
-          { message: "Nomor handphone wajib diisi untuk checkout Mayar." },
-          { status: 400 },
+          { message: "Database belum dikonfigurasi." },
+          { status: 500 },
         );
       }
 
@@ -31,10 +26,17 @@ export async function POST(request: Request) {
         );
       }
 
-      if (error.message === "MAYAR_WEBHOOK_TOKEN_MISSING") {
+      if (error.message === "MAYAR_INVOICE_FAILED") {
         return NextResponse.json(
-          { message: "MAYAR_WEBHOOK_TOKEN belum dikonfigurasi di environment." },
-          { status: 500 },
+          { message: "Gagal membuat invoice Mayar. Coba lagi." },
+          { status: 502 },
+        );
+      }
+
+      if (error.message === "MAYAR_INVOICE_NO_LINK") {
+        return NextResponse.json(
+          { message: "Invoice dibuat tapi URL checkout tidak tersedia." },
+          { status: 502 },
         );
       }
 
