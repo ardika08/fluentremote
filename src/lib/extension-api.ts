@@ -177,7 +177,7 @@ export async function translateForExtension(params: {
     text: params.text,
     sourceLanguage,
     targetLanguage,
-    aiProvider,
+    provider: aiProvider,
     apiKey,
     mode,
   });

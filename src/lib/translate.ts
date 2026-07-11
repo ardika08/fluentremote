@@ -105,8 +105,10 @@ async function callResponsesCompatibleApi(
   });
 
   if (!response.ok) {
+    // Log internally but don't leak provider details or status codes to callers
     const errorText = await response.text();
-    throw new Error(`Translation request failed: ${response.status} ${errorText}`);
+    console.error(`[translate] OpenAI request failed: ${response.status} ${errorText}`);
+    throw new Error("TRANSLATION_PROVIDER_ERROR");
   }
 
   const payload = (await response.json()) as unknown;
@@ -157,8 +159,10 @@ async function translateWithMaia(
   });
 
   if (!response.ok) {
+    // Log internally but don't leak provider details or status codes to callers
     const errorText = await response.text();
-    throw new Error(`MAIA translation request failed: ${response.status} ${errorText}`);
+    console.error(`[translate] MAIA request failed: ${response.status} ${errorText}`);
+    throw new Error("TRANSLATION_PROVIDER_ERROR");
   }
 
   const payload = (await response.json()) as unknown;

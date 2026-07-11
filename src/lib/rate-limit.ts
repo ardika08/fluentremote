@@ -72,11 +72,23 @@ export function getRateLimiter(name: string, options: RateLimiterOptions) {
 /**
  * Extracts a stable identifier from a request for rate limiting.
  * Prefers X-Forwarded-For (behind proxy/Nginx), falls back to direct IP.
+ * Falls back to "unknown" only as a last resort — all unknown requests
+ * share a single bucket, which is intentionally conservative.
  */
 export function getRateLimitIdentifier(request: Request): string {
   const forwarded = request.headers.get("x-forwarded-for");
   if (forwarded) {
-    return forwarded.split(",")[0]?.trim() ?? "unknown";
+    const ip = forwarded.split(",")[0]?.trim();
+    if (ip) return ip;
   }
+
+  // CF-Connecting-IP (Cloudflare) or X-Real-IP (Nginx)
+  const cfIp = request.headers.get("cf-connecting-ip");
+  if (cfIp) return cfIp.trim();
+
+  const realIp = request.headers.get("x-real-ip");
+  if (realIp) return realIp.trim();
+
+  // All unidentified requests share one bucket — conservative but safe
   return "unknown";
 }

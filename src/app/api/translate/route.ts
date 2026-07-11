@@ -108,6 +108,13 @@ export async function POST(request: Request) {
         );
       }
 
+      if (error.message === "TRANSLATION_PROVIDER_ERROR") {
+        return NextResponse.json(
+          { message: "Translation service is temporarily unavailable. Please try again." },
+          { status: 502 },
+        );
+      }
+
       return NextResponse.json({ message: error.message }, { status: 500 });
     }
 

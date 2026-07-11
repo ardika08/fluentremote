@@ -76,7 +76,9 @@ export async function POST(request: Request) {
                 ? "Save your OpenAI API key in Settings before using this provider."
                 : error.message === "MAIA_ROUTER_KEY_REQUIRED"
                   ? "Save your MAIA Router API key in Settings before using this provider."
-                  : error.message
+                  : error.message === "TRANSLATION_PROVIDER_ERROR"
+                    ? "Translation service is temporarily unavailable. Please try again."
+                    : error.message
         : "Unable to translate from the extension right now.";
 
     return NextResponse.json(

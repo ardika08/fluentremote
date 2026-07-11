@@ -2,10 +2,14 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 
 import { getExtensionConfig, getExtensionCorsHeaders } from "@/lib/extension-api";
+import { getRateLimiter, getRateLimitIdentifier } from "@/lib/rate-limit";
 
 const syncSchema = z.object({
   licenseKey: z.string().trim().min(1).max(128),
 });
+
+// 20 syncs per minute per IP — sync is heavier than translate (DB lookup)
+const limiter = getRateLimiter("extension-sync", { limit: 20, windowMs: 60_000 });
 
 export async function OPTIONS() {
   return new NextResponse(null, {
@@ -15,6 +19,24 @@ export async function OPTIONS() {
 }
 
 export async function POST(request: Request) {
+  // Rate limiting — keyed by IP (no session on extension routes)
+  const identifier = getRateLimitIdentifier(request);
+  const rateLimit = limiter.check(identifier);
+  if (!rateLimit.allowed) {
+    return NextResponse.json(
+      { message: "Too many requests. Please wait a moment and try again." },
+      {
+        status: 429,
+        headers: {
+          ...getExtensionCorsHeaders(),
+          "Retry-After": String(Math.ceil((rateLimit.resetAt - Date.now()) / 1000)),
+          "X-RateLimit-Limit": "20",
+          "X-RateLimit-Remaining": "0",
+        },
+      },
+    );
+  }
+
   try {
     const body = await request.json();
     const parsed = syncSchema.safeParse(body);

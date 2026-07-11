@@ -97,7 +97,7 @@ function getMayarWebhookSecret() {
 }
 
 function getMayarAmount() {
-  return Number(process.env.MAYAR_PRICE_AMOUNT ?? "99000");
+  return process.env.MAYAR_PRICE_AMOUNT ?? "99000";
 }
 
 function getMayarDescription() {
@@ -211,6 +211,8 @@ export async function createMayarCheckout(): Promise<PurchaseOrderSummary> {
     mayarTransactionId: transactionId,
     status: "pending",
     checkoutUrl,
+    customerName: user.name ?? user.email?.split("@")[0] ?? "Customer",
+    customerEmail: user.email ?? "",
     customerMobile: "",
     amount: getMayarAmount(),
     currency: getMayarCurrency(),
@@ -426,7 +428,7 @@ export function getMayarPricing(locale: "id" | "en" = "id") {
   const currency = getMayarCurrency();
   const formattedAmount = new Intl.NumberFormat(locale === "id" ? "id-ID" : "en-US", {
     maximumFractionDigits: 0,
-  }).format(amount);
+  }).format(Number(amount));
 
   return {
     amount,
