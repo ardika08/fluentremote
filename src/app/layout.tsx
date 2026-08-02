@@ -1,12 +1,6 @@
 import type { Metadata } from "next";
 import { Manrope, Space_Grotesk } from "next/font/google";
 
-import { SiteFooter } from "@/components/site-footer";
-import { SiteHeader } from "@/components/site-header";
-import { getServerSession } from "@/lib/auth-server";
-import { getDictionary } from "@/lib/i18n";
-import { getLocale } from "@/lib/i18n-server";
-
 import "./globals.css";
 
 const manrope = Manrope({
@@ -20,44 +14,23 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "FluentRemote",
+  title: "FluentRemote — Terjemahan Instan untuk Freelancer",
   description:
-    "A modern frontend shell for FluentRemote, the translation assistant for remote client conversations.",
+    "Ekstensi Chrome yang membantu freelancer terjemahkan pesan klien langsung di halaman chat. Tanpa copy-paste, tanpa tab baru.",
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const locale = await getLocale();
-  const dictionary = getDictionary(locale);
-  const session = await getServerSession();
-
   return (
     <html
-      lang={locale}
+      lang="id"
       className={`${manrope.variable} ${spaceGrotesk.variable} h-full scroll-smooth antialiased`}
     >
-      <body className="min-h-full bg-[var(--color-background)] text-[var(--color-foreground)]">
-        <div className="relative flex min-h-screen flex-col">
-          <SiteHeader
-            locale={locale}
-            dictionary={dictionary.header}
-            switcher={dictionary.localeSwitch}
-            auth={dictionary.auth.status}
-            user={
-              session?.user
-                ? {
-                    name: session.user.name,
-                    email: session.user.email,
-                  }
-                : null
-            }
-          />
-          {children}
-          <SiteFooter dictionary={dictionary.footer} />
-        </div>
+      <body className="min-h-full bg-slate-950 text-gray-100">
+        {children}
       </body>
     </html>
   );
