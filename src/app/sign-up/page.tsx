@@ -9,7 +9,7 @@ export default async function SignUpPage() {
   const session = await getServerSession();
 
   if (session?.user) {
-    redirect("/settings");
+    redirect("/dashboard");
   }
 
   const locale = await getLocale();

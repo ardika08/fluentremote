@@ -93,16 +93,16 @@ export function AuthStatus({ user, dictionary }: AuthStatusProps) {
   const initials = getInitials(user.name, user.email);
   const menuItems = [
     {
-      href: "/profile",
+      href: "/dashboard/akun",
       label: dictionary.profile,
       icon: UserRound,
-      isActive: pathname === "/profile",
+      isActive: pathname === "/dashboard/akun",
     },
     {
-      href: "/settings",
+      href: "/dashboard/terjemahan",
       label: dictionary.settings,
       icon: Settings2,
-      isActive: pathname === "/settings",
+      isActive: pathname === "/dashboard/terjemahan",
     },
   ];
 

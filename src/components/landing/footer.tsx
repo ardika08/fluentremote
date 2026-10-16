@@ -54,7 +54,7 @@ export function LandingFooter() {
                 { label: "Masuk", href: "/sign-in" },
                 { label: "Daftar", href: "/sign-up" },
                 { label: "Beli Lisensi", href: "/checkout" },
-                { label: "Pengaturan", href: "/settings" },
+                { label: "Pengaturan", href: "/dashboard" },
               ].map((link) => (
                 <li key={link.label}>
                   <Link

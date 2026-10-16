@@ -17,7 +17,7 @@ export function SiteFooter({ dictionary }: SiteFooterProps) {
           <Link href="/checkout" className="transition hover:text-[var(--color-foreground)]">
             {dictionary.activate}
           </Link>
-          <Link href="/settings" className="transition hover:text-[var(--color-foreground)]">
+          <Link href="/dashboard" className="transition hover:text-[var(--color-foreground)]">
             {dictionary.settings}
           </Link>
         </div>

@@ -77,7 +77,7 @@ export default async function CheckoutSuccessPage() {
           />
           <div className="flex flex-wrap gap-3">
             <Button asChild>
-              <Link href="/settings">{copy.openSettings}</Link>
+              <Link href="/dashboard">{copy.openSettings}</Link>
             </Button>
             <Button asChild variant="secondary">
               <Link href="/checkout">{copy.backCheckout}</Link>

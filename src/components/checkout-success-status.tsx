@@ -52,7 +52,7 @@ export function CheckoutSuccessStatus({
   useEffect(() => {
     if (state.hasPurchased) {
       const timeout = window.setTimeout(() => {
-        router.push("/settings");
+        router.push("/dashboard");
         router.refresh();
       }, 1400);
 
@@ -72,7 +72,7 @@ export function CheckoutSuccessStatus({
 
         if (payload.hasPurchased) {
           window.clearInterval(interval);
-          router.push("/settings");
+          router.push("/dashboard");
           router.refresh();
         }
       } catch {
@@ -105,7 +105,7 @@ export function CheckoutSuccessStatus({
         setState(payload);
 
         if (payload.hasPurchased) {
-          router.push("/settings");
+          router.push("/dashboard");
           router.refresh();
         }
       }

@@ -97,7 +97,7 @@ export default async function CheckoutPage() {
                     {copy.alreadyOwned}
                   </div>
                   <Button asChild variant="secondary">
-                    <Link href="/settings">{copy.openSettings}</Link>
+                    <Link href="/dashboard">{copy.openSettings}</Link>
                   </Button>
                 </div>
               ) : (

@@ -1,13 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-const PRIVATE_MATCHERS = [
-  "/settings",
-  "/profile",
-  "/checkout",
-  "/install-extension",
-  "/dev/backend",
-];
+const PRIVATE_MATCHERS = ["/dashboard", "/checkout", "/dev/backend"];
 
 function hasOptimisticAuthCookie(request: NextRequest) {
   return request.cookies.getAll().some(({ name }) => {
@@ -36,11 +30,5 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    "/settings/:path*",
-    "/profile/:path*",
-    "/checkout/:path*",
-    "/install-extension/:path*",
-    "/dev/backend/:path*",
-  ],
+  matcher: ["/dashboard/:path*", "/checkout/:path*", "/dev/backend/:path*"],
 };

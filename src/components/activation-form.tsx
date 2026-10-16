@@ -107,6 +107,7 @@ export function ActivationForm({ initialSnapshot, dictionary }: ActivationFormPr
           </p>
         </div>
 
+        {dictionary.mockItems.length > 0 ? (
         <div className="rounded-[16px] bg-[var(--color-surface)] p-5">
           <div className="text-sm font-semibold text-[var(--color-foreground)]">
             {dictionary.mockTitle}
@@ -117,6 +118,7 @@ export function ActivationForm({ initialSnapshot, dictionary }: ActivationFormPr
             ))}
           </ul>
         </div>
+        ) : null}
       </CardContent>
     </Card>
   );

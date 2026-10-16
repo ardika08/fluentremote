@@ -98,7 +98,7 @@ export function AuthForm({ mode, dictionary }: AuthFormProps) {
     startTransition(async () => {
       try {
         const origin = window.location.origin;
-        const callbackURL = `${origin}/settings`;
+        const callbackURL = `${origin}/dashboard`;
         const errorCallbackURL = `${origin}${mode === "sign-up" ? "/sign-up" : "/sign-in"}`;
 
         const result = await authClient.signIn.social({
@@ -164,7 +164,7 @@ export function AuthForm({ mode, dictionary }: AuthFormProps) {
           setSuccess(dictionary.signedIn);
         }
 
-        router.push("/settings");
+        router.push("/dashboard");
         router.refresh();
       } catch (caught) {
         setError(caught instanceof Error ? caught.message : dictionary.authFailed);
