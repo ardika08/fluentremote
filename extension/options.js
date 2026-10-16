@@ -24,7 +24,7 @@ async function loadOptions() {
   });
 
   if (!response?.ok) {
-    showMessage(response?.message || "Unable to load extension options.", "error");
+    showMessage(response?.message || "Gagal memuat opsi ekstensi.", "error");
     return;
   }
 
@@ -45,11 +45,11 @@ async function saveOptions() {
   });
 
   if (!response?.ok) {
-    showMessage(response?.message || "Unable to save extension settings.", "error");
+    showMessage(response?.message || "Gagal menyimpan pengaturan ekstensi.", "error");
     return;
   }
 
-  showMessage("Extension settings saved.");
+  showMessage("Pengaturan ekstensi tersimpan.");
 }
 
 async function syncOptions() {
@@ -60,11 +60,11 @@ async function syncOptions() {
   });
 
   if (!response?.ok) {
-    showMessage(response?.message || "Unable to sync extension.", "error");
+    showMessage(response?.message || "Gagal menyinkronkan ekstensi.", "error");
     return;
   }
 
-  showMessage("Extension synced successfully.");
+  showMessage("Ekstensi berhasil disinkronkan.");
 }
 
 saveButton.addEventListener("click", saveOptions);

@@ -1,12 +1,27 @@
 :root {
-  color-scheme: light;
+  --fr-bg: #0c0b10;
+  --fr-surface: #15131d;
+  --fr-surface-strong: #1c1927;
+  --fr-card: rgba(21, 19, 29, 0.92);
+  --fr-border: rgba(255, 255, 255, 0.09);
+  --fr-primary: #8b5cf6;
+  --fr-primary-strong: #7c3aed;
+  --fr-accent: #c084fc;
+  --fr-text: #f5f3ff;
+  --fr-muted: #a5a1b8;
+  --fr-glow: 0 0 0 1px rgba(139, 92, 246, 0.18), 0 18px 48px rgba(88, 28, 135, 0.35);
+
+  color-scheme: dark;
   font-family: Inter, ui-sans-serif, system-ui, sans-serif;
 }
 
 body {
   margin: 0;
-  background: linear-gradient(180deg, #f8fbff 0%, #ffffff 100%);
-  color: #0f172a;
+  background:
+    radial-gradient(320px 200px at 12% -10%, rgba(124, 58, 237, 0.22), transparent 62%),
+    radial-gradient(280px 180px at 90% 2%, rgba(217, 70, 239, 0.14), transparent 64%),
+    var(--fr-bg);
+  color: var(--fr-text);
 }
 
 .popup-shell {
@@ -31,28 +46,29 @@ body {
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #2563eb;
+  color: var(--fr-accent);
 }
 
 .popup-header h1 {
   margin: 12px 0 0;
-  font-size: 24px;
-  line-height: 1.2;
+  font-size: 23px;
+  line-height: 1.25;
+  color: var(--fr-text);
 }
 
 .popup-header p {
   margin: 10px 0 0;
-  font-size: 14px;
+  font-size: 13.5px;
   line-height: 1.7;
-  color: #64748b;
+  color: var(--fr-muted);
 }
 
 .card {
   margin-top: 16px;
-  border: 1px solid rgba(148, 163, 184, 0.22);
-  border-radius: 24px;
-  background: rgba(255, 255, 255, 0.92);
-  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+  border: 1px solid var(--fr-border);
+  border-radius: 18px;
+  background: var(--fr-card);
+  box-shadow: var(--fr-glow);
   padding: 16px;
 }
 
@@ -71,19 +87,29 @@ body {
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #64748b;
+  color: var(--fr-muted);
 }
 
 .field input {
   width: 100%;
   box-sizing: border-box;
   margin-top: 8px;
-  border: 1px solid rgba(203, 213, 225, 0.9);
-  border-radius: 16px;
+  border: 1px solid var(--fr-border);
+  border-radius: 14px;
   padding: 12px 14px;
   font-size: 14px;
-  color: #0f172a;
-  background: #fff;
+  color: var(--fr-text);
+  background: var(--fr-surface);
+}
+
+.field input::placeholder {
+  color: #6d6883;
+}
+
+.field input:focus {
+  outline: none;
+  border-color: rgba(139, 92, 246, 0.55);
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.16);
 }
 
 .field input[type="password"] {
@@ -106,7 +132,7 @@ body {
   appearance: none;
   border: none;
   cursor: pointer;
-  border-radius: 16px;
+  border-radius: 14px;
   padding: 12px 14px;
   font-size: 14px;
   font-weight: 700;
@@ -114,31 +140,57 @@ body {
 
 .primary-button {
   flex: 1;
-  background: #0f62fe;
+  background: linear-gradient(135deg, var(--fr-primary), #d946ef);
   color: #fff;
-  box-shadow: 0 16px 36px rgba(15, 98, 254, 0.2);
+  box-shadow: 0 14px 34px rgba(124, 58, 237, 0.32);
+}
+
+.primary-button:hover {
+  background: linear-gradient(135deg, var(--fr-primary-strong), #c026d3);
 }
 
 .secondary-button {
   flex: 1;
-  background: #eff6ff;
-  color: #0f172a;
-  border: 1px solid rgba(148, 163, 184, 0.18);
+  background: var(--fr-surface);
+  color: var(--fr-text);
+  border: 1px solid var(--fr-border);
+}
+
+.secondary-button:hover {
+  background: var(--fr-surface-strong);
+}
+
+.note {
+  margin-top: 12px;
+  border-radius: 12px;
+  background: rgba(139, 92, 246, 0.10);
+  border: 1px solid rgba(139, 92, 246, 0.22);
+  padding: 10px 12px;
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: var(--fr-muted);
+}
+
+.note strong {
+  color: var(--fr-text);
+  font-weight: 700;
 }
 
 .message {
   margin-top: 12px;
-  border-radius: 16px;
+  border-radius: 14px;
   padding: 12px 14px;
   font-size: 13px;
   line-height: 1.6;
-  background: #eff6ff;
-  color: #1d4ed8;
+  background: rgba(139, 92, 246, 0.12);
+  color: #ddd6fe;
+  border: 1px solid rgba(139, 92, 246, 0.28);
 }
 
 .message.error {
-  background: #fff1f2;
-  color: #be123c;
+  background: rgba(190, 18, 60, 0.16);
+  color: #fecdd3;
+  border-color: rgba(244, 63, 94, 0.32);
 }
 
 .popup-footer {
@@ -148,7 +200,7 @@ body {
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #64748b;
+  color: var(--fr-muted);
 }
 
 .hidden {
@@ -166,15 +218,16 @@ body {
   margin-top: 8px;
   font-size: 15px;
   font-weight: 600;
-  color: #0f172a;
+  color: var(--fr-text);
   line-height: 1.6;
 }
 
 .pill {
   border-radius: 999px;
-  background: #ecfdf5;
-  color: #047857;
-  padding: 8px 12px;
+  background: rgba(16, 185, 129, 0.14);
+  color: #6ee7b7;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  padding: 7px 12px;
   font-size: 12px;
   font-weight: 700;
 }
@@ -186,8 +239,9 @@ body {
 }
 
 .sync-tile {
-  border-radius: 18px;
-  background: #f8fbff;
+  border-radius: 14px;
+  background: var(--fr-surface);
+  border: 1px solid var(--fr-border);
   padding: 12px 14px;
 }
 
@@ -200,9 +254,9 @@ body {
 
 .ghost-button {
   appearance: none;
-  border: 1px solid rgba(148, 163, 184, 0.22);
-  background: #ffffff;
-  color: #2563eb;
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  background: rgba(139, 92, 246, 0.1);
+  color: #ddd6fe;
   border-radius: 999px;
   padding: 7px 10px;
   font-size: 11px;
@@ -212,19 +266,24 @@ body {
   cursor: pointer;
 }
 
+.ghost-button:hover {
+  background: rgba(139, 92, 246, 0.2);
+}
+
 .ghost-button:disabled,
 .primary-button:disabled,
 .secondary-button:disabled {
   cursor: not-allowed;
-  opacity: 0.65;
+  opacity: 0.55;
 }
 
 .notice {
   margin-top: 14px;
-  border-radius: 18px;
-  background: #eff6ff;
+  border-radius: 14px;
+  background: var(--fr-surface);
+  border: 1px solid var(--fr-border);
   padding: 12px 14px;
   font-size: 13px;
   line-height: 1.7;
-  color: #475569;
+  color: var(--fr-muted);
 }

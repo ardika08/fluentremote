@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "FluentRemote",
-  "description": "Highlight chat text, translate inline, and activate with your FluentRemote license key.",
+  "description": "Sorot teks chat, terjemahkan langsung di halaman, dan aktifkan dengan kode lisensi FluentRemote Anda.",
   "version": "0.1.0",
   "permissions": ["storage", "activeTab", "tabs", "scripting"],
   "optional_host_permissions": ["http://*/*", "https://*/*"],

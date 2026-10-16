@@ -1,7 +1,14 @@
+:root {
+  color-scheme: dark;
+}
+
 body {
   margin: 0;
-  background: linear-gradient(180deg, #f8fbff 0%, #ffffff 100%);
-  color: #0f172a;
+  background:
+    radial-gradient(560px 320px at 10% -10%, rgba(124, 58, 237, 0.20), transparent 62%),
+    radial-gradient(460px 280px at 92% 0%, rgba(217, 70, 239, 0.12), transparent 64%),
+    #0c0b10;
+  color: #f5f3ff;
   font-family: Inter, ui-sans-serif, system-ui, sans-serif;
 }
 
@@ -16,13 +23,14 @@ body {
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #2563eb;
+  color: #c084fc;
 }
 
 .hero h1 {
   margin: 14px 0 0;
-  font-size: 40px;
-  line-height: 1.1;
+  font-size: 38px;
+  line-height: 1.12;
+  color: #f5f3ff;
 }
 
 .hero p {
@@ -30,15 +38,15 @@ body {
   max-width: 640px;
   font-size: 15px;
   line-height: 1.8;
-  color: #64748b;
+  color: #a5a1b8;
 }
 
 .panel {
   margin-top: 24px;
-  border: 1px solid rgba(148, 163, 184, 0.22);
-  border-radius: 28px;
-  background: rgba(255, 255, 255, 0.92);
-  box-shadow: 0 24px 55px rgba(15, 23, 42, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 18px;
+  background: rgba(21, 19, 29, 0.92);
+  box-shadow: 0 0 0 1px rgba(139, 92, 246, 0.16), 0 18px 48px rgba(88, 28, 135, 0.32);
   padding: 20px;
 }
 
@@ -56,18 +64,29 @@ body {
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #64748b;
+  color: #a5a1b8;
 }
 
 .field input {
   width: 100%;
   box-sizing: border-box;
   margin-top: 8px;
-  border: 1px solid rgba(203, 213, 225, 0.9);
-  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 14px;
   padding: 14px 16px;
   font-size: 14px;
-  color: #0f172a;
+  color: #f5f3ff;
+  background: #15131d;
+}
+
+.field input::placeholder {
+  color: #6d6883;
+}
+
+.field input:focus {
+  outline: none;
+  border-color: rgba(139, 92, 246, 0.55);
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.16);
 }
 
 .button-row {
@@ -81,47 +100,58 @@ body {
   appearance: none;
   border: none;
   cursor: pointer;
-  border-radius: 16px;
+  border-radius: 14px;
   padding: 13px 16px;
   font-size: 14px;
   font-weight: 700;
 }
 
 .primary-button {
-  background: #0f62fe;
-  color: white;
-  box-shadow: 0 18px 40px rgba(15, 98, 254, 0.22);
+  background: linear-gradient(135deg, #8b5cf6, #d946ef);
+  color: #fff;
+  box-shadow: 0 16px 38px rgba(124, 58, 237, 0.3);
+}
+
+.primary-button:hover {
+  background: linear-gradient(135deg, #7c3aed, #c026d3);
 }
 
 .secondary-button {
-  background: #eff6ff;
-  color: #0f172a;
-  border: 1px solid rgba(148, 163, 184, 0.18);
+  background: #15131d;
+  color: #f5f3ff;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.secondary-button:hover {
+  background: #1c1927;
 }
 
 .note {
   margin-top: 16px;
-  border-radius: 18px;
-  background: #f8fbff;
+  border-radius: 14px;
+  background: #15131d;
+  border: 1px solid rgba(255, 255, 255, 0.09);
   padding: 14px 16px;
   font-size: 14px;
   line-height: 1.7;
-  color: #475569;
+  color: #a5a1b8;
 }
 
 .message {
   margin-top: 14px;
-  border-radius: 18px;
-  background: #eff6ff;
+  border-radius: 14px;
+  background: rgba(139, 92, 246, 0.12);
+  border: 1px solid rgba(139, 92, 246, 0.28);
   padding: 14px 16px;
   font-size: 14px;
   line-height: 1.7;
-  color: #1d4ed8;
+  color: #ddd6fe;
 }
 
 .message.error {
-  background: #fff1f2;
-  color: #be123c;
+  background: rgba(190, 18, 60, 0.16);
+  border-color: rgba(244, 63, 94, 0.32);
+  color: #fecdd3;
 }
 
 .hidden {

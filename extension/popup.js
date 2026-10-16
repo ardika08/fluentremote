@@ -38,7 +38,7 @@ function resetLicenseFieldForResync() {
   licenseKeyInput.dataset.hasStoredKey = "false";
 }
 
-function setBusyState(isBusy, label = "Sync extension") {
+function setBusyState(isBusy, label = "Sinkronkan ekstensi") {
   syncButton.disabled = isBusy;
   openSettingsButton.disabled = isBusy;
   openGuideButton.disabled = isBusy;
@@ -60,8 +60,8 @@ function renderSyncedConfig(syncedConfig) {
     syncedConfig.aiProvider === "maia_router" ? "MAIA Router" : "OpenAI";
   languagePair.textContent = `${syncedConfig.sourceLanguage} → ${syncedConfig.targetLanguage}`;
   providerReady.textContent = syncedConfig.hasProviderKeys
-    ? "Ready"
-    : "Missing API keys in Settings";
+    ? "Siap"
+    : "API key belum diisi di Pengaturan";
 }
 
 async function loadStoredSettings() {
@@ -70,7 +70,7 @@ async function loadStoredSettings() {
   });
 
   if (!response?.ok) {
-    throw new Error(response?.message || "Unable to load extension settings.");
+    throw new Error(response?.message || "Gagal memuat pengaturan ekstensi.");
   }
 
   return response.data;
@@ -90,7 +90,7 @@ async function loadPopup() {
     renderSyncedConfig(settings.syncedConfig);
   } catch (error) {
     showMessage(
-      error instanceof Error ? error.message : "Unable to load extension settings.",
+      error instanceof Error ? error.message : "Gagal memuat pengaturan ekstensi.",
       "error",
     );
   }
@@ -104,7 +104,7 @@ async function syncExtension() {
     const rawValue = licenseKeyInput.value.trim();
     const hasStoredKey = licenseKeyInput.dataset.hasStoredKey === "true";
     if (!rawValue && !hasStoredKey) {
-      throw new Error("Paste your FluentRemote license key first.");
+      throw new Error("Tempelkan kode lisensi FluentRemote terlebih dahulu.");
     }
 
     if (!hasStoredKey || rawValue.includes("-")) {
@@ -121,7 +121,7 @@ async function syncExtension() {
     });
 
     if (!response?.ok) {
-      const syncMessage = response?.message || "Unable to sync extension.";
+      const syncMessage = response?.message || "Gagal menyinkronkan ekstensi.";
       if (
         syncMessage.includes("not valid") ||
         syncMessage.includes("revoked") ||
@@ -129,7 +129,7 @@ async function syncExtension() {
       ) {
         resetLicenseFieldForResync();
         throw new Error(
-          "This license key is no longer valid. Copy your latest license key from FluentRemote Web Settings, then sync again.",
+          "Kode lisensi ini sudah tidak berlaku. Salin kode terbaru dari Pengaturan FluentRemote Web, lalu sinkronkan ulang.",
         );
       }
 
@@ -142,10 +142,10 @@ async function syncExtension() {
     licenseKeyInput.value = maskLicenseKey(stored.licenseKey || rawValue);
     licenseKeyInput.dataset.hasStoredKey = "true";
 
-    showMessage("Extension synced. Highlight text on any chat page to begin.");
+    showMessage("Ekstensi tersinkron. Sorot teks di halaman chat untuk mulai menerjemahkan.");
   } catch (error) {
     showMessage(
-      error instanceof Error ? error.message : "Unable to sync extension.",
+      error instanceof Error ? error.message : "Gagal menyinkronkan ekstensi.",
       "error",
     );
   } finally {
@@ -162,7 +162,7 @@ async function swapLanguages() {
     const syncedConfig = settings.syncedConfig;
 
     if (!settings.licenseKey || !syncedConfig) {
-      throw new Error("Sync your extension first.");
+      throw new Error("Sinkronkan ekstensi terlebih dahulu.");
     }
 
     const response = await chrome.runtime.sendMessage({
@@ -174,14 +174,14 @@ async function swapLanguages() {
     });
 
     if (!response?.ok) {
-      throw new Error(response?.message || "Unable to switch language pair.");
+      throw new Error(response?.message || "Gagal menukar pasangan bahasa.");
     }
 
     renderSyncedConfig(response.data);
-    showMessage("Language pair updated.");
+    showMessage("Pasangan bahasa diperbarui.");
   } catch (error) {
     showMessage(
-      error instanceof Error ? error.message : "Unable to switch language pair.",
+      error instanceof Error ? error.message : "Gagal menukar pasangan bahasa.",
       "error",
     );
   } finally {

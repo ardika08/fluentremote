@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="id">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,21 +13,21 @@
           <img src="icons/icon48.png" alt="FluentRemote" class="brand-icon" />
           <div class="eyebrow">FluentRemote</div>
         </div>
-        <h1>Activate extension</h1>
-        <p>Paste your license key, then sync the translation setup stored in your web dashboard.</p>
+        <h1>Aktivasi ekstensi</h1>
+        <p>Tempelkan kode lisensi Anda, lalu sinkronkan pengaturan terjemahan dari dasbor web.</p>
       </section>
 
       <section class="card">
         <label class="field">
-          <span>License key</span>
+          <span>Kode lisensi</span>
           <input id="licenseKey" type="password" placeholder="FLR-XXXX-XXXX-XXXX-XXXX" />
         </label>
         <div class="note">
-          Your license key can be found in the <strong>Settings</strong> menu on FluentRemote Web.
+          Kode lisensi tersedia di menu <strong>Pengaturan</strong> pada FluentRemote Web.
         </div>
         <div class="button-row">
-          <button id="syncButton" class="primary-button" type="button">Sync extension</button>
-          <button id="openSettingsButton" class="secondary-button" type="button">Open web settings</button>
+          <button id="syncButton" class="primary-button" type="button">Sinkronkan ekstensi</button>
+          <button id="openSettingsButton" class="secondary-button" type="button">Buka pengaturan web</button>
         </div>
         <div id="message" class="message hidden"></div>
       </section>
@@ -35,8 +35,8 @@
       <section id="statusCard" class="card hidden">
         <div class="status-row">
           <div>
-            <div class="label">License status</div>
-            <div id="licenseStatus" class="value">Active</div>
+            <div class="label">Status lisensi</div>
+            <div id="licenseStatus" class="value">Aktif</div>
           </div>
           <div class="pill" id="providerPill">OpenAI</div>
         </div>
@@ -44,27 +44,27 @@
         <div class="sync-grid">
           <div class="sync-tile">
             <div class="tile-head">
-              <div class="label">Language pair</div>
-              <button id="swapLanguagesButton" class="ghost-button" type="button">Switch</button>
+              <div class="label">Pasangan bahasa</div>
+              <button id="swapLanguagesButton" class="ghost-button" type="button">Tukar</button>
             </div>
             <div id="languagePair" class="value">Indonesian → English</div>
           </div>
           <div class="sync-tile">
-            <div class="label">Provider keys</div>
-            <div id="providerReady" class="value">Ready</div>
+            <div class="label">API key provider</div>
+            <div id="providerReady" class="value">Siap</div>
           </div>
         </div>
 
         <div class="notice">
-          Highlight text on any chat page to trigger the translation tooltip. API keys stay in the web dashboard.
+          Sorot teks di halaman chat mana pun untuk memunculkan tooltip terjemahan. API key tetap tersimpan di dasbor web.
         </div>
 
         <div class="button-column">
-          <button id="openGuideButton" class="secondary-button" type="button">Open install guide</button>
+          <button id="openGuideButton" class="secondary-button" type="button">Buka panduan instalasi</button>
         </div>
       </section>
 
-      <footer class="popup-footer">Created by Ardika Yudha</footer>
+      <footer class="popup-footer">Dibuat oleh Ardika Yudha</footer>
     </main>
 
     <script src="popup.js" type="module"></script>

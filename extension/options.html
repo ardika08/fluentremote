@@ -1,37 +1,37 @@
 <!doctype html>
-<html lang="en">
+<html lang="id">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FluentRemote Options</title>
+    <title>Pengaturan FluentRemote</title>
     <link rel="stylesheet" href="options.css" />
   </head>
   <body>
     <main class="options-shell">
       <section class="hero">
-        <div class="eyebrow">FluentRemote extension</div>
-        <h1>Connection settings</h1>
-        <p>Point the extension to your deployed web app, paste the same license key, then sync again when your dashboard configuration changes.</p>
+        <div class="eyebrow">Ekstensi FluentRemote</div>
+        <h1>Pengaturan koneksi</h1>
+        <p>Arahkan ekstensi ke web app Anda, tempelkan kode lisensi yang sama, lalu sinkronkan lagi setiap kali pengaturan di dasbor berubah.</p>
       </section>
 
       <section class="panel">
         <label class="field">
-          <span>Backend URL</span>
+          <span>URL server</span>
           <input id="backendUrl" type="url" placeholder="https://your-domain.com" />
         </label>
 
         <label class="field">
-          <span>License key</span>
+          <span>Kode lisensi</span>
           <input id="licenseKey" type="text" placeholder="FLR-XXXX-XXXX-XXXX-XXXX" />
         </label>
 
         <div class="button-row">
-          <button id="saveButton" class="primary-button" type="button">Save settings</button>
-          <button id="syncButton" class="secondary-button" type="button">Sync now</button>
+          <button id="saveButton" class="primary-button" type="button">Simpan pengaturan</button>
+          <button id="syncButton" class="secondary-button" type="button">Sinkronkan sekarang</button>
         </div>
 
         <div class="note">
-          This page is for advanced or development setup only. Normal users only need the license key in the popup. API keys stay in the web dashboard.
+          Halaman ini hanya untuk pengaturan lanjutan. Pengguna biasa cukup memakai kode lisensi di popup. API key tetap tersimpan di dasbor web.
         </div>
 
         <div id="message" class="message hidden"></div>
