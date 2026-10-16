@@ -47,7 +47,7 @@ export default async function ProfilePage() {
       </div>
 
       <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
-        <Card className="bg-white/84">
+        <Card className="bg-[var(--color-card)]">
           <CardHeader>
             <div className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.18em] text-[var(--color-primary)]">
               <BadgeCheck className="h-4 w-4" />
@@ -57,8 +57,8 @@ export default async function ProfilePage() {
             <CardDescription>{dictionary.auth.profilePage.accountCardDescription}</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="flex items-center gap-4 rounded-[1.6rem] border border-[var(--color-border)] bg-[linear-gradient(180deg,rgba(237,243,251,0.9),rgba(255,255,255,0.92))] p-5">
-              <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-[1.45rem] bg-[linear-gradient(135deg,rgba(15,98,254,0.96),rgba(56,189,248,0.9))] text-lg font-bold tracking-[0.14em] text-white shadow-[0_18px_38px_rgba(15,98,254,0.24)]">
+            <div className="flex items-center gap-4 rounded-[16px] border border-[var(--color-border)] bg-[linear-gradient(180deg,rgba(28,25,39,0.92),rgba(21,19,29,0.96))] p-5">
+              <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-[14px] bg-[linear-gradient(180deg,rgba(28,25,39,0.92),rgba(21,19,29,0.96))] text-lg font-bold tracking-[0.14em] text-white shadow-[0_18px_38px_rgba(124,58,237,0.24)]">
                 {initials}
               </div>
               <div className="min-w-0">
@@ -76,7 +76,7 @@ export default async function ProfilePage() {
           </CardContent>
         </Card>
 
-        <Card className="bg-white/80">
+        <Card className="bg-[var(--color-card)]">
           <CardHeader>
             <div className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.18em] text-[var(--color-primary)]">
               <Sparkles className="h-4 w-4" />

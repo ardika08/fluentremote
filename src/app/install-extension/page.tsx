@@ -24,12 +24,12 @@ export default async function InstallExtensionPage() {
   const isId = locale === "id";
   const availabilityCopy = {
     ready: isId
-      ? "MVP extension sudah tersedia di repo ini dan bisa dipasang lewat mode Load unpacked di Chrome."
-      : "The extension MVP is already available in this repo and can be installed through Chrome's Load unpacked mode.",
+      ? "Ekstensi sudah siap dipasang. Ikuti langkah instalasi di bawah, lalu masukkan kode lisensi Anda saat aktivasi."
+      : "The extension is ready to install. Follow the steps below, then enter your license code during activation.",
     pending: isId
-      ? "Selesaikan checkout terlebih dulu, lalu gunakan folder extension MVP dari repo ini melalui mode Load unpacked di Chrome."
-      : "Complete checkout first, then use the extension MVP folder from this repo through Chrome's Load unpacked mode.",
-    button: isId ? "Gunakan folder extension/" : "Use extension/ folder",
+      ? "Selesaikan pembelian terlebih dahulu untuk membuka panduan instalasi lengkap."
+      : "Complete your purchase first to unlock the full installation guide.",
+    button: isId ? "Segera di Chrome Web Store" : "Coming soon to Chrome Web Store",
   };
 
   return (
@@ -53,7 +53,7 @@ export default async function InstallExtensionPage() {
           licenseKey={snapshot.licenseKey}
         />
 
-        <Card className="bg-white/88">
+        <Card className="bg-[var(--color-card)]">
           <CardHeader className="gap-4">
             <div className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.18em] text-[var(--color-primary)]">
               <Download className="h-4 w-4" />
@@ -79,7 +79,7 @@ export default async function InstallExtensionPage() {
               <Button asChild className="w-full sm:w-auto">
                 <Link href="/checkout">
                   <ShoppingCart className="h-4 w-4" />
-                  {isId ? "Selesaikan checkout dulu" : "Complete checkout first"}
+                  {isId ? "Selesaikan pembelian" : "Complete your purchase"}
                 </Link>
               </Button>
             )}
@@ -87,7 +87,7 @@ export default async function InstallExtensionPage() {
         </Card>
       </div>
 
-      <Card className="bg-white/88">
+      <Card className="bg-[var(--color-card)]">
         <CardHeader className="gap-4">
           <div className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.18em] text-[var(--color-primary)]">
             <Layers3 className="h-4 w-4" />
@@ -100,7 +100,7 @@ export default async function InstallExtensionPage() {
           {dictionary.installGuidePage.steps.map((step) => (
             <div
               key={step}
-              className="rounded-2xl border border-[var(--color-border)] bg-white/70 px-4 py-4 text-sm leading-7 text-[var(--color-muted-foreground)]"
+              className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)] px-4 py-4 text-sm leading-7 text-[var(--color-muted-foreground)]"
             >
               {step}
             </div>
@@ -115,7 +115,7 @@ export default async function InstallExtensionPage() {
         hasProviderKeys={preferences.hasOpenAIApiKey || preferences.hasMaiaRouterApiKey}
       />
 
-      <Card className="bg-white/88">
+      <Card className="bg-[var(--color-card)]">
         <CardHeader className="gap-4">
           <div className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.18em] text-[var(--color-primary)]">
             <ShieldCheck className="h-4 w-4" />

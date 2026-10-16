@@ -31,9 +31,9 @@ export function LandingFloatingCTA({ price }: { price: string }) {
           >
             <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
               <div className="hidden sm:flex items-center gap-2">
-                <Zap className="w-4 h-4 text-blue-400" />
+                <Zap className="w-4 h-4 text-violet-400" />
                 <span className="text-sm text-slate-300 font-medium">FluentRemote</span>
-                <span className="text-slate-500 text-sm">— Terjemahan instan untuk freelancer</span>
+                <span className="text-slate-400 text-sm">— Terjemahan instan untuk freelancer</span>
               </div>
               <div className="flex items-center gap-3 ml-auto">
                 <Button
@@ -47,9 +47,9 @@ export function LandingFloatingCTA({ price }: { price: string }) {
                 <Button
                   asChild
                   size="sm"
-                  className="bg-gradient-to-r from-blue-500 to-cyan-400 hover:from-blue-600 hover:to-cyan-500 text-white border-0 shadow-lg shadow-blue-500/20"
+                  className="bg-gradient-to-r from-violet-500 to-fuchsia-400 hover:from-violet-600 hover:to-fuchsia-500 text-white border-0 shadow-lg shadow-violet-500/20"
                 >
-                  <Link href="/checkout">Beli — {price}</Link>
+                  <Link href="/checkout">Beli Lisensi — {price}</Link>
                 </Button>
               </div>
             </div>

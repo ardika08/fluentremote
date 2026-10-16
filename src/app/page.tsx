@@ -12,7 +12,7 @@ export default async function HomePage() {
   const pricing = getMayarPricing("id");
 
   return (
-    <div className="min-h-screen bg-slate-950 text-gray-100">
+    <div className="min-h-screen bg-[var(--color-background)] text-[var(--color-foreground)]">
       <LandingNavbar />
       <main>
         <LandingHero price={pricing.formatted} />

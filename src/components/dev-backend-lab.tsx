@@ -125,7 +125,7 @@ export function DevBackendLab() {
 
   return (
     <div className="grid gap-6 xl:grid-cols-3">
-      <Card className="bg-white/84">
+      <Card className="bg-[var(--color-card)]">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <KeyRound className="h-5 w-5 text-[var(--color-primary)]" />
@@ -161,7 +161,7 @@ export function DevBackendLab() {
         </CardContent>
       </Card>
 
-      <Card className="bg-white/84">
+      <Card className="bg-[var(--color-card)]">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Save className="h-5 w-5 text-[var(--color-primary)]" />
@@ -174,7 +174,7 @@ export function DevBackendLab() {
         <CardContent className="space-y-4">
           <div className="grid gap-4">
             <div className="space-y-2">
-              <Label htmlFor="source-language">Source language</Label>
+              <Label htmlFor="source-language">Bahasa sumber</Label>
               <Select value={sourceLanguage} onValueChange={setSourceLanguage}>
                 <SelectTrigger id="source-language">
                   <SelectValue placeholder="Select source language" />
@@ -189,7 +189,7 @@ export function DevBackendLab() {
               </Select>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="target-language">Target language</Label>
+              <Label htmlFor="target-language">Bahasa tujuan</Label>
               <Select value={targetLanguage} onValueChange={setTargetLanguage}>
                 <SelectTrigger id="target-language">
                   <SelectValue placeholder="Select target language" />
@@ -236,7 +236,7 @@ export function DevBackendLab() {
         </CardContent>
       </Card>
 
-      <Card className="bg-white/84">
+      <Card className="bg-[var(--color-card)]">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <WandSparkles className="h-5 w-5 text-[var(--color-primary)]" />

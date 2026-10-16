@@ -8,7 +8,7 @@ type FeatureCardProps = {
 
 export function FeatureCard({ index, title, description }: FeatureCardProps) {
   return (
-    <Card className="h-full bg-white/80">
+    <Card className="h-full bg-[var(--color-card)]">
       <CardHeader>
         <div className="text-sm font-semibold tracking-[0.22em] text-[var(--color-primary)] uppercase">
           {index}

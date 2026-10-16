@@ -19,7 +19,7 @@ export function ExtensionPopupPreview({
   const canActivate = hasPurchased && Boolean(licenseKey);
 
   return (
-    <Card className="bg-white/88">
+    <Card className="bg-[var(--color-card)]">
       <CardHeader className="gap-4">
         <div className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.18em] text-[var(--color-primary)]">
           <Sparkles className="h-4 w-4" />
@@ -37,8 +37,8 @@ export function ExtensionPopupPreview({
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <div className="mx-auto max-w-sm rounded-[32px] border border-slate-200 bg-[linear-gradient(180deg,_rgba(248,250,252,0.96)_0%,_rgba(255,255,255,0.98)_100%)] p-4 shadow-[0_26px_65px_rgba(15,23,42,0.12)]">
-          <div className="flex items-center justify-between gap-3 rounded-[22px] bg-slate-950 px-4 py-3 text-white">
+        <div className="mx-auto max-w-sm rounded-[18px] border border-[var(--color-border)] bg-[linear-gradient(180deg,rgba(28,25,39,0.92),rgba(21,19,29,0.96))] p-4 shadow-[0_26px_65px_rgba(15,23,42,0.12)]">
+          <div className="flex items-center justify-between gap-3 rounded-[22px] bg-[var(--color-background)] px-4 py-3 text-white">
             <div>
               <div className="text-sm font-semibold">FluentRemote</div>
               <div className="text-[11px] uppercase tracking-[0.18em] text-slate-300">
@@ -62,12 +62,12 @@ export function ExtensionPopupPreview({
             </div>
           </div>
 
-          <div className="mt-4 space-y-4 rounded-[26px] border border-slate-200 bg-white p-4">
+          <div className="mt-4 space-y-4 rounded-[16px] border border-[var(--color-border)] bg-[var(--color-surface)] p-4">
             <div className="flex items-center gap-2 text-sm font-medium text-[var(--color-foreground)]">
               {hasPurchased ? (
                 <KeyRound className="h-4 w-4 text-[var(--color-primary)]" />
               ) : (
-                <LockKeyhole className="h-4 w-4 text-amber-700" />
+                <LockKeyhole className="h-4 w-4 text-amber-300" />
               )}
               {isId ? "Masukkan license key" : "Enter license key"}
             </div>
@@ -75,8 +75,8 @@ export function ExtensionPopupPreview({
             <div
               className={`rounded-2xl border px-4 py-4 font-mono text-sm ${
                 hasPurchased
-                  ? "border-emerald-200 bg-emerald-50/70 text-[var(--color-foreground)]"
-                  : "border-slate-200 bg-slate-50 text-slate-400"
+                  ? "border-emerald-500/30 bg-emerald-500/1070 text-[var(--color-foreground)]"
+                  : "border-[var(--color-border)] bg-[var(--color-surface)] text-slate-400"
               }`}
             >
               {hasPurchased && licenseKey
@@ -87,13 +87,13 @@ export function ExtensionPopupPreview({
             </div>
 
             <div className="grid gap-3">
-              <div className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-600">
+              <div className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-3 text-sm text-slate-400">
                 {isId
                   ? "Langkah berikutnya: login dengan akun yang sama untuk sync provider key dan preferensi."
                   : "Next step: sign in with the same account to sync provider keys and preferences."}
               </div>
               {canActivate && !hasProviderKeys ? (
-                <div className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm leading-6 text-amber-900">
+                <div className="rounded-2xl border border-amber-500/30 bg-amber-50 px-4 py-3 text-sm leading-6 text-amber-300">
                   <div className="flex items-start gap-2">
                     <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
                     <span>
@@ -107,8 +107,8 @@ export function ExtensionPopupPreview({
               <div
                 className={`inline-flex items-center justify-center gap-2 rounded-2xl px-4 py-3 text-sm font-semibold ${
                   canActivate && hasProviderKeys
-                    ? "bg-[var(--color-primary)] text-white shadow-[0_18px_40px_rgba(15,98,254,0.22)]"
-                    : "bg-slate-200 text-slate-500"
+                    ? "bg-[var(--color-primary)] text-white shadow-[0_18px_40px_rgba(124,58,237,0.22)]"
+                    : "bg-white/15 text-slate-400"
                 }`}
               >
                 {canActivate && hasProviderKeys ? (

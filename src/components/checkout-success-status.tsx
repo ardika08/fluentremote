@@ -119,7 +119,7 @@ export function CheckoutSuccessStatus({
       <div className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-4 text-sm leading-7 text-[var(--color-muted-foreground)]">
         <div className="flex items-center gap-2 font-semibold text-[var(--color-foreground)]">
           {state.hasPurchased || status === "paid" ? (
-            <CheckCircle2 className="h-4 w-4 text-emerald-600" />
+            <CheckCircle2 className="h-4 w-4 text-emerald-400" />
           ) : (
             <Clock3 className="h-4 w-4 text-[var(--color-primary)]" />
           )}
@@ -131,14 +131,14 @@ export function CheckoutSuccessStatus({
             {dictionary.polling}
           </div>
         ) : (
-          <div className="mt-2 text-xs uppercase tracking-[0.18em] text-emerald-700">
+          <div className="mt-2 text-xs uppercase tracking-[0.18em] text-emerald-400">
             {dictionary.redirecting}
           </div>
         )}
       </div>
 
       <div className="grid gap-3 md:grid-cols-2">
-        <div className="rounded-2xl border border-[var(--color-border)] bg-white/80 px-4 py-4 text-sm text-[var(--color-muted-foreground)]">
+        <div className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)] px-4 py-4 text-sm text-[var(--color-muted-foreground)]">
           <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--color-muted-foreground)]">
             {dictionary.orderLabel}
           </div>
@@ -146,7 +146,7 @@ export function CheckoutSuccessStatus({
             {state.latestPurchase?.id ?? "-"}
           </div>
         </div>
-        <div className="rounded-2xl border border-[var(--color-border)] bg-white/80 px-4 py-4 text-sm text-[var(--color-muted-foreground)]">
+        <div className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)] px-4 py-4 text-sm text-[var(--color-muted-foreground)]">
           <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--color-muted-foreground)]">
             {dictionary.mobileLabel}
           </div>
@@ -156,7 +156,7 @@ export function CheckoutSuccessStatus({
         </div>
       </div>
 
-      <div className="rounded-[26px] border border-[var(--color-border)] bg-white/80 p-4">
+      <div className="rounded-[16px] border border-[var(--color-border)] bg-[var(--color-card)] p-4">
         <div className="grid gap-3 md:grid-cols-4">
           {[
             { done: true, label: dictionary.steps.checkout },
@@ -168,7 +168,7 @@ export function CheckoutSuccessStatus({
               key={step.label}
               className={`rounded-2xl border px-4 py-4 text-sm ${
                 step.done
-                  ? "border-emerald-200 bg-emerald-50/80 text-emerald-900"
+                  ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-400"
                   : "border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-muted-foreground)]"
               }`}
             >

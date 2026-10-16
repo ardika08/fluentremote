@@ -1,16 +1,35 @@
 @import "tailwindcss";
 
+/* ============================================================
+   FluentRemote — design tokens (brand A)
+   Base  : #0c0b10  (dark)   Accent: purple / violet gradient
+   Radius: 8-18px            Glow  : soft purple
+   ============================================================ */
 :root {
-  --background: #020817;
-  --foreground: #f8fafc;
-  --color-background: #020817;
-  --color-foreground: #f8fafc;
-  --color-surface: #0f172a;
-  --color-card: rgba(15, 23, 42, 0.8);
-  --color-border: rgba(255, 255, 255, 0.08);
-  --color-primary: #3b82f6;
-  --color-primary-strong: #2563eb;
-  --color-muted-foreground: #94a3b8;
+  --background: #0c0b10;
+  --foreground: #f5f3ff;
+
+  --color-background: #0c0b10;
+  --color-foreground: #f5f3ff;
+
+  --color-surface: #15131d;
+  --color-surface-strong: #1c1927;
+  --color-card: rgba(21, 19, 29, 0.82);
+  --color-border: rgba(255, 255, 255, 0.09);
+  --color-border-strong: rgba(168, 85, 247, 0.28);
+
+  --color-primary: #8b5cf6;
+  --color-primary-strong: #7c3aed;
+  --color-accent: #c084fc;
+  --color-accent-warm: #d946ef;
+  --color-muted-foreground: #a5a1b8;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+
+  --glow-primary: 0 0 0 1px rgba(139, 92, 246, 0.18), 0 18px 48px rgba(88, 28, 135, 0.35);
+  --glow-soft: 0 12px 36px rgba(0, 0, 0, 0.45);
 }
 
 @theme inline {
@@ -22,19 +41,25 @@
 }
 
 html {
-  background: #020817;
+  background: #0c0b10;
   scroll-behavior: smooth;
 }
 
 body {
   color: var(--color-foreground);
   font-family: var(--font-sans), sans-serif;
-  background: #020817;
+  background:
+    radial-gradient(900px 500px at 12% -8%, rgba(124, 58, 237, 0.16), transparent 60%),
+    radial-gradient(760px 460px at 88% 4%, rgba(217, 70, 239, 0.10), transparent 62%),
+    #0c0b10;
+  background-attachment: fixed;
 }
 
 a,
 button,
 input,
+select,
+textarea,
 [role="button"] {
   transition:
     color 160ms ease,
@@ -45,29 +70,58 @@ input,
 }
 
 ::selection {
-  background: rgba(59, 130, 246, 0.3);
+  background: rgba(139, 92, 246, 0.35);
+}
+
+* {
+  scrollbar-color: rgba(139, 92, 246, 0.45) transparent;
 }
 
 .text-balance {
   text-wrap: balance;
 }
 
-/* Gradient text utility */
 .gradient-text {
-  background: linear-gradient(135deg, #60a5fa, #22d3ee);
+  background: linear-gradient(135deg, #a78bfa 0%, #c084fc 45%, #e879f9 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* Glassmorphism card */
 .glass-card {
-  background: rgba(15, 23, 42, 0.8);
+  background: var(--color-card);
   backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--color-border);
 }
 
-/* Animate marquee */
+.glow-primary {
+  box-shadow: var(--glow-primary);
+}
+
+.glow-soft {
+  box-shadow: var(--glow-soft);
+}
+
+.gradient-border {
+  position: relative;
+  background: linear-gradient(135deg, #7c3aed, #d946ef);
+  padding: 1px;
+  border-radius: var(--radius-lg);
+}
+
+.gradient-border-inner {
+  background: var(--color-surface);
+  border-radius: calc(var(--radius-lg) - 1px);
+  height: 100%;
+  width: 100%;
+}
+
+input,
+select,
+textarea {
+  color-scheme: dark;
+}
+
 @keyframes marquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
@@ -75,19 +129,4 @@ input,
 
 .animate-marquee {
   animation: marquee 25s linear infinite;
-}
-
-/* Gradient border trick */
-.gradient-border {
-  position: relative;
-  background: linear-gradient(135deg, #3b82f6, #22d3ee);
-  padding: 1px;
-  border-radius: 1rem;
-}
-
-.gradient-border-inner {
-  background: #0f172a;
-  border-radius: calc(1rem - 1px);
-  height: 100%;
-  width: 100%;
 }

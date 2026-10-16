@@ -8,23 +8,23 @@ const steps = [
     icon: Zap,
     number: "01",
     title: "Beli Lisensi",
-    description: "Beli sekali, pakai selamanya. Tidak ada biaya langganan bulanan.",
-    color: "from-blue-500 to-blue-600",
-    glow: "bg-blue-500/20",
+    description: "Sekali bayar untuk akses permanen, tanpa biaya langganan bulanan.",
+    color: "from-violet-500 to-violet-600",
+    glow: "bg-violet-500/20",
   },
   {
     icon: Download,
     number: "02",
     title: "Install Extension",
-    description: "Pasang FluentRemote dari Chrome Web Store dalam 30 detik.",
-    color: "from-cyan-500 to-cyan-600",
-    glow: "bg-cyan-500/20",
+    description: "Pasang ekstensi FluentRemote di Chrome, lalu sematkan di toolbar.",
+    color: "from-violet-500 to-violet-600",
+    glow: "bg-violet-500/20",
   },
   {
     icon: Key,
     number: "03",
     title: "Hubungkan Akun",
-    description: "Masukkan lisensi key di popup extension. Selesai, langsung aktif.",
+    description: "Masukkan kode lisensi di popup ekstensi. Aktivasi selesai seketika.",
     color: "from-violet-500 to-violet-600",
     glow: "bg-violet-500/20",
   },
@@ -32,35 +32,35 @@ const steps = [
     icon: Settings,
     number: "04",
     title: "Mulai Terjemahkan",
-    description: "Sorot teks di halaman chat mana saja — terjemahan muncul instan.",
-    color: "from-emerald-500 to-emerald-600",
-    glow: "bg-emerald-500/20",
+    description: "Sorot teks di halaman chat mana pun; terjemahan muncul seketika.",
+    color: "from-violet-500 to-violet-600",
+    glow: "bg-violet-500/20",
   },
 ];
 
 export function LandingHowItWorks() {
   return (
-    <section id="cara-kerja" className="py-24 relative">
+    <section id="cara-kerja" className="py-20 relative scroll-mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Heading */}
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-sm font-medium mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-400 text-sm font-medium mb-4">
             Cara Kerja
           </div>
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+          <h2 className="text-balance text-3xl sm:text-4xl font-bold text-white mb-4">
             Setup dalam{" "}
-            <span className="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-violet-400 to-fuchsia-300 bg-clip-text text-transparent">
               5 Menit
             </span>
           </h2>
           <p className="text-slate-400 text-lg max-w-xl mx-auto">
-            Dari beli sampai aktif — tidak butuh konfigurasi rumit.
+            Dari pembelian sampai aktif, tanpa konfigurasi rumit.
           </p>
         </motion.div>
 

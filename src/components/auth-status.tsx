@@ -111,11 +111,11 @@ export function AuthStatus({ user, dictionary }: AuthStatusProps) {
       <button
         type="button"
         onClick={() => setIsOpen((current) => !current)}
-        className="flex items-center gap-3 rounded-[1.6rem] border border-white/70 bg-white/88 px-2.5 py-2 shadow-[0_20px_45px_rgba(16,32,59,0.08)] backdrop-blur-xl hover:-translate-y-0.5 hover:shadow-[0_24px_52px_rgba(16,32,59,0.12)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-surface)]"
+        className="flex items-center gap-3 rounded-[16px] border border-white/70 bg-[var(--color-card)] px-2.5 py-2 shadow-[0_20px_45px_rgba(16,32,59,0.08)] backdrop-blur-xl hover:-translate-y-0.5 hover:shadow-[0_24px_52px_rgba(16,32,59,0.12)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-surface)]"
         aria-haspopup="menu"
         aria-expanded={isOpen}
       >
-        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[1.25rem] bg-[linear-gradient(135deg,rgba(15,98,254,0.96),rgba(56,189,248,0.9))] text-sm font-bold tracking-[0.12em] text-white shadow-[0_16px_32px_rgba(15,98,254,0.28)]">
+        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[1.25rem] bg-[linear-gradient(180deg,rgba(28,25,39,0.92),rgba(21,19,29,0.96))] text-sm font-bold tracking-[0.12em] text-white shadow-[0_16px_32px_rgba(124,58,237,0.28)]">
           {initials}
         </div>
         <div className="hidden min-w-0 text-left sm:block">
@@ -126,7 +126,7 @@ export function AuthStatus({ user, dictionary }: AuthStatusProps) {
             {user.email}
           </div>
         </div>
-        <div className="flex h-9 w-9 items-center justify-center rounded-[1rem] bg-[rgba(237,243,251,0.9)] text-[var(--color-muted-foreground)]">
+        <div className="flex h-9 w-9 items-center justify-center rounded-[1rem] bg-[rgba(255,255,255,0.06)] text-[var(--color-muted-foreground)]">
           <ChevronDown
             className={`h-4 w-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
           />
@@ -134,10 +134,10 @@ export function AuthStatus({ user, dictionary }: AuthStatusProps) {
       </button>
 
       {isOpen ? (
-        <div className="absolute right-0 top-[calc(100%+0.9rem)] z-50 w-[19rem] rounded-[1.7rem] border border-white/75 bg-white/95 p-2.5 shadow-[0_28px_80px_rgba(15,23,42,0.18)] backdrop-blur-2xl">
-          <div className="rounded-[1.35rem] bg-[linear-gradient(180deg,rgba(237,243,251,0.9),rgba(248,250,252,0.95))] px-4 py-3.5">
+        <div className="absolute right-0 top-[calc(100%+0.9rem)] z-50 w-[19rem] rounded-[1.7rem] border border-white/75 bg-[var(--color-card)] p-2.5 shadow-[0_28px_80px_rgba(15,23,42,0.18)] backdrop-blur-2xl">
+          <div className="rounded-[1.35rem] bg-[linear-gradient(180deg,rgba(28,25,39,0.92),rgba(21,19,29,0.96))] px-4 py-3.5">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[1rem] bg-[linear-gradient(135deg,rgba(15,98,254,0.96),rgba(56,189,248,0.9))] text-xs font-bold tracking-[0.12em] text-white">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[1rem] bg-[linear-gradient(180deg,rgba(28,25,39,0.92),rgba(21,19,29,0.96))] text-xs font-bold tracking-[0.12em] text-white">
                 {initials}
               </div>
               <div className="min-w-0">
@@ -166,8 +166,8 @@ export function AuthStatus({ user, dictionary }: AuthStatusProps) {
                   className={cn(
                     "flex items-center gap-3 rounded-[1rem] px-3.5 py-3 text-sm font-medium transition-colors",
                     item.isActive
-                      ? "bg-[rgba(15,98,254,0.10)] text-[var(--color-primary)] shadow-[inset_0_0_0_1px_rgba(15,98,254,0.08)]"
-                      : "text-[var(--color-foreground)] hover:bg-[rgba(237,243,251,0.86)]",
+                      ? "bg-[rgba(139,92,246,0.14)] text-[var(--color-primary)] shadow-[inset_0_0_0_1px_rgba(139,92,246,0.25)]"
+                      : "text-[var(--color-foreground)] hover:bg-[rgba(255,255,255,0.06)]",
                   )}
                 >
                   <Icon
@@ -190,7 +190,7 @@ export function AuthStatus({ user, dictionary }: AuthStatusProps) {
             type="button"
             onClick={handleSignOut}
             disabled={isPending}
-            className="flex w-full items-center gap-3 rounded-[1rem] px-3.5 py-3 text-left text-sm font-medium text-rose-600 hover:bg-rose-50 disabled:opacity-60"
+            className="flex w-full items-center gap-3 rounded-[1rem] px-3.5 py-3 text-left text-sm font-medium text-rose-400 hover:bg-rose-500/10 disabled:opacity-60"
           >
             {isPending ? (
               <>

@@ -7,27 +7,27 @@ import { Plus, Minus } from "lucide-react";
 const faqs = [
   {
     q: "Apa itu FluentRemote?",
-    a: "FluentRemote adalah ekstensi Chrome yang membantu freelancer dan remote worker menerjemahkan pesan klien langsung di halaman chat — tanpa perlu buka tab baru atau copy-paste ke Google Translate.",
+    a: "FluentRemote adalah ekstensi Chrome yang menerjemahkan pesan klien langsung di halaman chat Anda, tanpa perlu membuka tab baru atau menyalin teks ke layanan lain.",
   },
   {
     q: "Apakah ini benar-benar bayar sekali?",
-    a: "Ya. Kamu bayar satu kali dan mendapat akses selamanya termasuk semua update di masa depan. Tidak ada biaya bulanan atau tahunan.",
+    a: "Ya. Anda membayar satu kali dan memperoleh akses permanen, termasuk pembaruan fitur di masa berikutnya. Tidak ada biaya bulanan atau tahunan.",
   },
   {
     q: "AI provider apa yang didukung?",
-    a: "FluentRemote mendukung OpenAI (GPT-4o mini) dan MAIA Router. Kamu bisa bawa API key sendiri sehingga biaya terjemahan sangat minimal — biasanya kurang dari Rp100 untuk ratusan terjemahan.",
+    a: "FluentRemote mendukung OpenAI (GPT-4o mini) dan MAIA Router. Anda memakai API key milik sendiri, sehingga biaya terjemahan mengikuti tarif provider yang Anda pilih.",
   },
   {
     q: "Apakah riwayat chat saya tersimpan?",
-    a: "Tidak. FluentRemote tidak menyimpan isi percakapan kamu. Teks yang diterjemahkan dikirim langsung ke AI provider pilihan kamu dan tidak pernah disimpan di server kami.",
+    a: "Tidak. FluentRemote tidak menyimpan isi percakapan Anda. Teks yang diterjemahkan dikirim langsung ke provider AI pilihan Anda dan tidak disimpan di server kami.",
   },
   {
     q: "Platform apa saja yang didukung?",
-    a: "FluentRemote bekerja di semua halaman web yang bisa dibuka di Chrome — Upwork, Fiverr, email, Slack, Discord, dan lainnya. Selama ada browser, FluentRemote bisa dipakai.",
+    a: "FluentRemote bekerja di halaman web apa pun yang Anda buka di Chrome — Upwork, Fiverr, email, Slack, Discord, dan lainnya.",
   },
   {
     q: "Bagaimana cara aktivasi setelah beli?",
-    a: "Setelah pembayaran berhasil, kamu akan mendapat lisensi key via email. Masukkan key tersebut di popup extension FluentRemote dan langsung aktif dalam hitungan detik.",
+    a: "Setelah pembayaran terkonfirmasi, kode lisensi muncul otomatis di halaman Pengaturan akun Anda. Salin kode tersebut ke popup ekstensi, dan aktivasi langsung selesai.",
   },
 ];
 
@@ -35,7 +35,7 @@ export function LandingFAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section id="faq" className="py-24">
+    <section id="faq" className="py-20 scroll-mt-20">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Heading */}
         <motion.div
@@ -48,7 +48,7 @@ export function LandingFAQ() {
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
             Pertanyaan Umum
           </h2>
-          <p className="text-slate-400">Ada yang kurang jelas? Hubungi kami via email.</p>
+          <p className="text-slate-400">Masih ada yang kurang jelas? Hubungi kami melalui email.</p>
         </motion.div>
 
         {/* FAQ items */}
@@ -64,7 +64,7 @@ export function LandingFAQ() {
               <div
                 className={`rounded-xl border transition-colors cursor-pointer ${
                   openIndex === i
-                    ? "border-blue-500/30 bg-blue-500/5"
+                    ? "border-violet-500/30 bg-violet-500/5"
                     : "border-white/8 bg-slate-900/60 hover:border-white/15"
                 }`}
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
@@ -73,7 +73,7 @@ export function LandingFAQ() {
                   <span className={`font-medium text-sm sm:text-base ${openIndex === i ? "text-white" : "text-slate-200"}`}>
                     {faq.q}
                   </span>
-                  <div className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center ${openIndex === i ? "bg-blue-500/20 text-blue-400" : "bg-white/5 text-slate-400"}`}>
+                  <div className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center ${openIndex === i ? "bg-violet-500/20 text-violet-400" : "bg-white/5 text-slate-400"}`}>
                     {openIndex === i ? <Minus className="w-3.5 h-3.5" /> : <Plus className="w-3.5 h-3.5" />}
                   </div>
                 </div>

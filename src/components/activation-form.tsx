@@ -53,7 +53,7 @@ export function ActivationForm({ initialSnapshot, dictionary }: ActivationFormPr
   }
 
   return (
-    <Card className="overflow-hidden bg-white/88">
+    <Card className="overflow-hidden bg-[var(--color-card)]">
       <CardHeader className="gap-4">
         <Badge className="w-fit">{dictionary.step}</Badge>
         <CardTitle>{dictionary.title}</CardTitle>
@@ -92,9 +92,9 @@ export function ActivationForm({ initialSnapshot, dictionary }: ActivationFormPr
         <div
           className={`rounded-2xl border p-4 text-sm ${
             currentStatus === "active"
-              ? "border-emerald-200 bg-emerald-50 text-emerald-900"
+              ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-400"
               : currentStatus === "revoked"
-                ? "border-rose-200 bg-rose-50 text-rose-900"
+                ? "border-rose-500/30 bg-rose-500/10 text-rose-400"
                 : "border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-muted-foreground)]"
           }`}
         >
@@ -107,7 +107,7 @@ export function ActivationForm({ initialSnapshot, dictionary }: ActivationFormPr
           </p>
         </div>
 
-        <div className="rounded-[24px] bg-[var(--color-surface)] p-5">
+        <div className="rounded-[16px] bg-[var(--color-surface)] p-5">
           <div className="text-sm font-semibold text-[var(--color-foreground)]">
             {dictionary.mockTitle}
           </div>

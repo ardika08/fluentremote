@@ -7,23 +7,23 @@ const features = [
   {
     icon: Languages,
     title: "Terjemahan Baca",
-    description: "Sorot pesan klien — terjemahan muncul langsung sebagai tooltip tanpa meninggalkan halaman.",
-    color: "text-blue-400",
-    bg: "bg-blue-500/10",
-    border: "border-blue-500/20",
+    description: "Sorot pesan klien; terjemahan muncul sebagai tooltip tanpa meninggalkan halaman.",
+    color: "text-violet-400",
+    bg: "bg-violet-500/10",
+    border: "border-violet-500/20",
   },
   {
     icon: Pen,
     title: "Tulis Ulang Pesan",
-    description: "Draft balasan dalam bahasa sendiri, FluentRemote menerjemahkan dan mengganti teks sebelum kirim.",
-    color: "text-cyan-400",
-    bg: "bg-cyan-500/10",
-    border: "border-cyan-500/20",
+    description: "Tulis balasan dalam bahasa Anda, lalu FluentRemote menerjemahkan dan menggantinya sebelum dikirim.",
+    color: "text-violet-300",
+    bg: "bg-violet-500/10",
+    border: "border-violet-500/20",
   },
   {
     icon: RefreshCw,
     title: "Ganti Bahasa Kapan Saja",
-    description: "Klik di popup untuk ganti pasangan bahasa. Perubahan langsung aktif tanpa reload.",
+    description: "Ganti pasangan bahasa dari popup ekstensi. Perubahan langsung aktif tanpa memuat ulang.",
     color: "text-violet-400",
     bg: "bg-violet-500/10",
     border: "border-violet-500/20",
@@ -31,41 +31,41 @@ const features = [
   {
     icon: Cpu,
     title: "Pilih AI Provider",
-    description: "Pakai OpenAI GPT-4o mini atau MAIA Router. Bawa API key sendiri, hemat biaya.",
-    color: "text-emerald-400",
-    bg: "bg-emerald-500/10",
-    border: "border-emerald-500/20",
+    description: "Pilih OpenAI GPT-4o mini atau MAIA Router dengan API key milik Anda sendiri.",
+    color: "text-violet-300",
+    bg: "bg-violet-500/10",
+    border: "border-violet-500/20",
   },
   {
     icon: Globe,
     title: "Universal di Semua Platform",
-    description: "Bekerja di Upwork, Fiverr, email, atau platform chat mana saja selama ada browser.",
-    color: "text-amber-400",
-    bg: "bg-amber-500/10",
-    border: "border-amber-500/20",
+    description: "Bekerja di Upwork, Fiverr, email, dan platform chat lain yang Anda buka di Chrome.",
+    color: "text-violet-300",
+    bg: "bg-violet-500/10",
+    border: "border-violet-500/20",
   },
   {
     icon: Shield,
     title: "Privasi Terjaga",
     description: "API key dienkripsi di server. Tidak ada log percakapan yang disimpan.",
-    color: "text-rose-400",
-    bg: "bg-rose-500/10",
-    border: "border-rose-500/20",
+    color: "text-violet-300",
+    bg: "bg-violet-500/10",
+    border: "border-violet-500/20",
   },
 ];
 
 export function LandingFeatures() {
   return (
-    <section id="fitur" className="py-24 relative">
+    <section id="fitur" className="py-20 relative scroll-mt-20">
       {/* Subtle background */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-500/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-violet-500/5 rounded-full blur-3xl" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Heading */}
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -74,14 +74,14 @@ export function LandingFeatures() {
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-400 text-sm font-medium mb-4">
             Fitur Inti
           </div>
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-            Semua yang Kamu Butuhkan untuk{" "}
-            <span className="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">
+          <h2 className="text-balance text-3xl sm:text-4xl font-bold text-white mb-4">
+            Semua yang Anda Butuhkan untuk{" "}
+            <span className="bg-gradient-to-r from-violet-400 to-fuchsia-300 bg-clip-text text-transparent">
               Kerja Lancar
             </span>
           </h2>
           <p className="text-slate-400 text-lg max-w-xl mx-auto">
-            Dirancang khusus untuk freelancer yang sering berkomunikasi dengan klien internasional.
+            Dirancang untuk freelancer yang berkomunikasi dengan klien internasional.
           </p>
         </motion.div>
 

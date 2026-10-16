@@ -29,7 +29,7 @@ export function LocaleToggle({
   }
 
   return (
-    <div className="flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-white/80 p-1 shadow-sm">
+    <div className="flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-card)] p-1 shadow-sm">
       <div className="hidden items-center gap-2 pl-2 text-xs font-semibold tracking-[0.16em] text-[var(--color-muted-foreground)] uppercase sm:flex">
         <Languages className="h-3.5 w-3.5" />
         {label}

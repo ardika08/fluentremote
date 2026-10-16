@@ -9,7 +9,7 @@ type SecurityCardProps = {
 
 export function SecurityCard({ title, description }: SecurityCardProps) {
   return (
-    <Card className="h-full bg-white/78">
+    <Card className="h-full bg-[var(--color-card)]">
       <CardHeader className="gap-4">
         <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--color-primary)]/10 text-[var(--color-primary)]">
           <ShieldCheck className="h-6 w-6" />

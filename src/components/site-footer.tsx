@@ -10,7 +10,7 @@ type SiteFooterProps = {
 
 export function SiteFooter({ dictionary }: SiteFooterProps) {
   return (
-    <footer className="border-t border-white/60 bg-white/65">
+    <footer className="border-t border-[var(--color-border)] bg-[var(--color-card)]">
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-6 py-8 text-sm text-[var(--color-muted-foreground)] md:flex-row md:items-center md:justify-between lg:px-10">
         <div>{dictionary.description}</div>
         <div className="flex items-center gap-5">

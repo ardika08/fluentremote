@@ -148,7 +148,7 @@ export function SettingsForm({
   }
 
   return (
-    <Card className="bg-white/88">
+    <Card className="bg-[var(--color-card)]">
       <CardHeader className="gap-4">
         <div className="flex items-center justify-between gap-3">
           <div>
@@ -334,7 +334,7 @@ export function SettingsForm({
 
         <Separator />
 
-        <div className="rounded-[28px] border border-[var(--color-border)] bg-[linear-gradient(180deg,_rgba(248,251,255,0.96)_0%,_rgba(255,255,255,0.94)_100%)] p-5">
+        <div className="rounded-[18px] border border-[var(--color-border)] bg-[linear-gradient(180deg,rgba(28,25,39,0.92),rgba(21,19,29,0.96))] p-5">
           <div className="text-sm font-medium text-[var(--color-foreground)]">
             {dictionary.apiKeyPurchaseTitle}
           </div>
@@ -367,8 +367,8 @@ export function SettingsForm({
           <div
             className={`flex items-center gap-2 rounded-2xl px-4 py-3 text-sm ${
               isError
-                ? "border border-rose-200 bg-rose-50 text-rose-900"
-                : "border border-emerald-200 bg-emerald-50 text-emerald-900"
+                ? "border border-rose-500/30 bg-rose-500/10 text-rose-400"
+                : "border border-emerald-500/30 bg-emerald-500/10 text-emerald-400"
             }`}
           >
             <Check className="h-4 w-4" />

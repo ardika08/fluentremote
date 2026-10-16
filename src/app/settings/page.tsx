@@ -39,33 +39,33 @@ export default async function SettingsPage() {
       ? "Anda belum membeli FluentRemote."
       : "You have not purchased FluentRemote yet.",
     purchaseBannerDescription: isId
-      ? "Selesaikan pembayaran untuk membuka license key unik, setup API key provider, extension activation, dan live translation."
+      ? "Selesaikan pembayaran untuk membuka kode lisensi unik, menyimpan API key provider, dan mengaktifkan ekstensi."
       : "Complete your purchase to unlock your unique license key, provider API key setup, extension activation, and live translation.",
-    checkoutLabel: isId ? "Lanjut ke checkout" : "Continue to checkout",
-    lockedWorkspaceEyebrow: isId ? "Preview workspace" : "Workspace preview",
+    checkoutLabel: isId ? "Lanjut ke pembelian" : "Continue to checkout",
+    lockedWorkspaceEyebrow: isId ? "Pratinjau ruang kerja" : "Workspace preview",
     lockedWorkspaceTitle: isId
-      ? "Workspace ini akan terbuka penuh segera setelah pembayaran terkonfirmasi."
+      ? "Ruang kerja ini akan terbuka penuh segera setelah pembayaran terkonfirmasi."
       : "This workspace unlocks fully as soon as your payment is confirmed.",
     lockedWorkspaceDescription: isId
       ? "Sebelum membeli, kami sengaja tidak menampilkan form aktif agar area ini tetap terasa premium dan fokus pada langkah berikutnya."
       : "Before purchase, the active form stays hidden so this area feels premium and keeps the next step focused.",
     lockedWorkspaceSupport: isId
-      ? "Setelah pembayaran sukses, area ini langsung berubah menjadi panel aktif untuk license key, provider API key, dan sinkronisasi extension."
+      ? "Setelah pembayaran sukses, area ini langsung berubah menjadi panel aktif untuk kode lisensi, API key provider, dan sinkronisasi ekstensi."
       : "After a successful payment, this area turns directly into the active panel for your license key, provider API keys, and extension sync.",
     lockedWorkspaceHint: isId
       ? "Checkout sekali untuk membuka seluruh workflow."
       : "Complete one checkout to unlock the full workflow.",
     lockedWorkspaceNote: isId
-      ? "Begitu Mayar mengonfirmasi pembayaran, halaman ini langsung berubah menjadi workspace aktif tanpa langkah manual tambahan."
+      ? "Begitu Mayar mengonfirmasi pembayaran, halaman ini langsung berubah menjadi ruang kerja aktif tanpa langkah manual tambahan."
       : "As soon as Mayar confirms the payment, this page turns into the active workspace without extra manual steps.",
     extensionTitle: isId
       ? "Pasang alat browser agar FluentRemote bisa dipakai langsung di chat Anda."
       : "Install the browser tool so FluentRemote can work directly inside your chats.",
     extensionDescription: isId
-      ? "Setelah akun Anda memiliki license dan API key provider tersimpan di Settings, extension bisa diaktivasi dengan paste license key saat pertama dipasang."
+      ? "Setelah akun Anda memiliki lisensi dan API key provider tersimpan di Pengaturan, ekstensi dapat diaktifkan dengan menempelkan kode lisensi saat pertama dipasang."
       : "Once your account has a license and provider API keys saved in Settings, the extension can be activated by pasting the license key during first install.",
     extensionReady: isId
-      ? "Akses sudah aktif. Buka panduan instalasi lalu gunakan license key Anda saat aktivasi extension."
+      ? "Akses sudah aktif. Buka panduan instalasi, lalu gunakan kode lisensi Anda saat aktivasi ekstensi."
       : "Access is active. Open the installation guide, then use your license key during extension activation.",
     extensionLocked: isId
       ? "Area ini tetap terlihat sebagai preview, tetapi baru aktif penuh setelah pembayaran sukses."
@@ -75,7 +75,7 @@ export default async function SettingsPage() {
     extensionReadyBadge: isId ? "Siap" : "Ready",
     checklistEyebrow: isId ? "Checklist kesiapan" : "Readiness checklist",
     checklistTitle: isId
-      ? "Pastikan tiga hal ini siap sebelum extension dipakai."
+      ? "Pastikan tiga hal ini siap sebelum ekstensi dipakai."
       : "Make sure these three things are ready before using the extension.",
     checklistDescription: isId
       ? "Checklist ini membantu user melihat langkah mana yang sudah selesai dan mana yang masih perlu dibereskan."
@@ -85,10 +85,10 @@ export default async function SettingsPage() {
         ? "License aktif dan sudah muncul di akun."
         : "The license is active and already attached to the account.",
       providerKeys: isId
-        ? "Minimal satu provider API key sudah tersimpan di Settings."
+        ? "Minimal satu API key provider sudah tersimpan di Pengaturan."
         : "At least one provider API key is already saved in Settings.",
       extension: isId
-        ? "Extension siap dipasang dan diaktivasi dengan license key yang sama."
+        ? "Ekstensi siap dipasang dan diaktivasi dengan kode lisensi yang sama."
         : "The extension is ready to be installed and activated with the same license key.",
     },
     checklistPending: isId ? "Masih menunggu" : "Pending",
@@ -115,16 +115,16 @@ export default async function SettingsPage() {
       ? "API key belum bisa dihapus saat ini."
       : "The API key could not be removed right now.",
     apiKeySectionTitle: isId
-      ? "API key provider disimpan di Settings"
+      ? "API key provider disimpan di Pengaturan"
       : "Provider API keys are stored in Settings",
     apiKeySectionDescription: isId
-      ? "Extension tidak meminta input API key saat aktivasi awal. Isi OpenAI API Key dan/atau MAIA Router API Key di sini, lalu extension akan menyinkronkannya otomatis setelah login dengan akun yang sama."
+      ? "Ekstensi tidak meminta API key saat aktivasi awal. Isi OpenAI API Key dan/atau MAIA Router API Key di sini; ekstensi akan menyinkronkannya otomatis setelah Anda masuk dengan akun yang sama."
       : "The extension does not ask for API keys during first activation. Fill in your OpenAI API Key and/or MAIA Router API Key here, then the extension will sync them automatically after you sign in with the same account.",
     apiKeyPurchaseTitle: isId
       ? "Tools ini tidak termasuk API key"
       : "This tool does not include API keys",
     apiKeyPurchaseDescription: isId
-      ? "FluentRemote memakai API key milik user. Jika Anda belum memilikinya, beli API key provider terlebih dulu lalu simpan di Settings."
+      ? "FluentRemote memakai API key milik Anda sendiri. Jika belum memilikinya, beli API key provider terlebih dahulu lalu simpan di Pengaturan."
       : "FluentRemote uses user-owned API keys. If you do not have one yet, purchase a provider API key first and then save it in Settings.",
     apiKeyOpenAIBuy: isId
       ? "Beli API key OpenAI mulai $5"
@@ -133,18 +133,18 @@ export default async function SettingsPage() {
       ? "Beli API key MAIA Router mulai $1"
       : "Buy MAIA Router API key from $1",
     lockedKeysNotice: isId
-      ? "Field ini baru aktif setelah pembelian sukses."
+      ? "Kolom ini aktif setelah pembelian berhasil."
       : "This field unlocks after a successful purchase.",
   };
 
   const licenseDictionary = {
     ...dictionary.licenseStatus,
-    copyLabel: isId ? "Copy" : "Copy",
+    copyLabel: isId ? "Salin" : "Copy",
     copiedLabel: isId ? "Tersalin" : "Copied",
     keyEmpty: isId ? "Belum diterbitkan" : "Not issued yet",
     checkedEmpty: isId ? "Belum ada pembelian aktif" : "No active purchase yet",
     purchaseHint: isId
-      ? "Selesaikan pembayaran untuk mendapatkan license key unik milik akun Anda."
+      ? "Selesaikan pembayaran untuk mendapatkan kode lisensi unik milik akun Anda."
       : "Complete your purchase to receive the unique license key tied to your account.",
   };
 
@@ -153,7 +153,7 @@ export default async function SettingsPage() {
     inactiveNotice: isId
       ? "Selesaikan pembelian dan simpan API key provider Anda terlebih dulu."
       : "Complete your purchase and save your provider API keys first.",
-    checkoutCta: isId ? "Buka checkout" : "Open checkout",
+    checkoutCta: isId ? "Buka pembelian" : "Open checkout",
   };
 
   const hasProviderKeys =
@@ -178,11 +178,11 @@ export default async function SettingsPage() {
       </div>
 
       {!snapshot.hasPurchased ? (
-        <Card className="border-amber-200 bg-[linear-gradient(180deg,_rgba(255,251,235,0.96)_0%,_rgba(255,255,255,0.9)_100%)]">
+        <Card className="border-amber-500/30 bg-[linear-gradient(180deg,rgba(120,53,15,0.30),rgba(21,19,29,0.92))]">
           <CardHeader className="gap-4">
-            <div className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.18em] text-amber-700">
+            <div className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.18em] text-amber-300">
               <ShoppingCart className="h-4 w-4" />
-              Payment lock
+              Menunggu pembayaran
             </div>
             <CardTitle>{settingsCopy.purchaseBannerTitle}</CardTitle>
             <CardDescription>{settingsCopy.purchaseBannerDescription}</CardDescription>
@@ -213,9 +213,9 @@ export default async function SettingsPage() {
             providerOptions={dictionary.providers}
           />
         ) : (
-          <Card className="overflow-hidden border-white/60 bg-[linear-gradient(180deg,_rgba(14,25,46,0.98)_0%,_rgba(18,33,59,0.96)_100%)] text-white lg:self-start">
+          <Card className="overflow-hidden border-[var(--color-border)] bg-[linear-gradient(180deg,rgba(30,20,54,0.98),rgba(21,19,29,0.96))] text-white lg:self-start">
             <CardHeader className="gap-4">
-              <div className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.18em] text-sky-200">
+              <div className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.18em] text-violet-200">
                 <LockKeyhole className="h-4 w-4" />
                 {settingsCopy.lockedWorkspaceEyebrow}
               </div>
@@ -225,7 +225,7 @@ export default async function SettingsPage() {
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-5">
-              <div className="relative overflow-hidden rounded-[32px] border border-white/10 bg-white/6 p-6 shadow-[0_24px_50px_rgba(15,23,42,0.22)]">
+              <div className="relative overflow-hidden rounded-[18px] border border-white/10 bg-white/6 p-6 shadow-[0_24px_50px_rgba(15,23,42,0.22)]">
                 <div className="space-y-5 opacity-55 blur-[2px]">
                   <div className="space-y-2">
                     <div className="h-3 w-28 rounded-full bg-white/20" />
@@ -253,8 +253,8 @@ export default async function SettingsPage() {
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.1),_transparent_55%)]" />
                 <div className="absolute inset-0 flex items-center justify-center px-6 text-center">
                   <div className="max-w-md space-y-4">
-                    <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border border-sky-200/20 bg-white/10 backdrop-blur-md">
-                      <LockKeyhole className="h-7 w-7 text-sky-100" />
+                    <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border border-violet-200/20 bg-white/10 backdrop-blur-md">
+                      <LockKeyhole className="h-7 w-7 text-violet-100" />
                     </div>
                     <div className="text-xl font-semibold text-white">
                       {settingsCopy.lockedWorkspaceHint}
@@ -265,7 +265,7 @@ export default async function SettingsPage() {
                   </div>
                 </div>
               </div>
-              <div className="rounded-3xl border border-sky-300/20 bg-sky-300/10 px-5 py-5 text-sm leading-7 text-sky-100">
+              <div className="rounded-[16px] border border-violet-300/20 bg-violet-300/10 px-5 py-5 text-sm leading-7 text-violet-100">
                 {settingsCopy.lockedWorkspaceNote}
               </div>
             </CardContent>
@@ -277,7 +277,7 @@ export default async function SettingsPage() {
             locale={locale}
             dictionary={licenseDictionary}
           />
-          <Card className="bg-white/82">
+          <Card className="bg-[var(--color-card)]">
             <CardHeader className="gap-4">
               <div className="text-sm uppercase tracking-[0.2em] text-[var(--color-primary)]">
                 {settingsCopy.checklistEyebrow}
@@ -307,13 +307,13 @@ export default async function SettingsPage() {
                   key={item.label}
                   className={`flex items-start justify-between gap-3 rounded-2xl border px-4 py-4 ${
                     item.done
-                      ? "border-emerald-200 bg-emerald-50/80"
+                      ? "border-emerald-500/30 bg-emerald-500/10"
                       : "border-[var(--color-border)] bg-[var(--color-surface)]"
                   }`}
                 >
                   <div className="flex items-start gap-3">
                     {item.done ? (
-                      <CheckCircle2 className="mt-0.5 h-5 w-5 text-emerald-600" />
+                      <CheckCircle2 className="mt-0.5 h-5 w-5 text-emerald-400" />
                     ) : (
                       <CircleDashed className="mt-0.5 h-5 w-5 text-[var(--color-muted-foreground)]" />
                     )}
@@ -328,7 +328,7 @@ export default async function SettingsPage() {
               ))}
             </CardContent>
           </Card>
-          <Card className="bg-white/82">
+          <Card className="bg-[var(--color-card)]">
             <CardHeader className="gap-4">
               <div className="flex items-center justify-between gap-3">
                 <div>

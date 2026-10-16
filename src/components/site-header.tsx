@@ -46,10 +46,10 @@ export function SiteHeader({
   ];
 
   return (
-    <header className="sticky top-0 z-40 border-b border-white/60 bg-[color:var(--color-surface)]/80 backdrop-blur-xl">
+    <header className="sticky top-0 z-40 border-b border-[var(--color-border)] bg-[color:var(--color-surface)]/80 backdrop-blur-xl">
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
         <Link href="/" className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[var(--color-primary)] text-base font-bold text-white shadow-[0_18px_40px_rgba(15,98,254,0.25)]">
+          <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[var(--color-primary)] text-base font-bold text-white shadow-[0_18px_40px_rgba(124,58,237,0.25)]">
             FR
           </div>
           <div>

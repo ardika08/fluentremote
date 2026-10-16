@@ -109,7 +109,7 @@ export function TranslationPlaygroundCard({
   }
 
   return (
-    <Card className="bg-white/88">
+    <Card className="bg-[var(--color-card)]">
       <CardHeader className="gap-4">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
@@ -174,7 +174,7 @@ export function TranslationPlaygroundCard({
         </div>
 
         {error ? (
-          <div className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm leading-6 text-amber-900">
+          <div className="rounded-2xl border border-amber-500/30 bg-amber-50 px-4 py-3 text-sm leading-6 text-amber-300">
             {error}
           </div>
         ) : null}
@@ -201,12 +201,12 @@ export function TranslationPlaygroundCard({
           </a>
         ) : null}
 
-        <div className="rounded-[24px] border border-[var(--color-border)] bg-[var(--color-surface)]/70 p-5">
+        <div className="rounded-[16px] border border-[var(--color-border)] bg-[var(--color-surface)]/70 p-5">
           <div className="mb-3 flex items-center gap-2 text-sm font-semibold text-[var(--color-foreground)]">
             <Sparkles className="h-4 w-4 text-[var(--color-primary)]" />
             {dictionary.resultLabel}
           </div>
-          <div className="rounded-2xl bg-white/80 px-4 py-4 text-sm leading-7 text-[var(--color-foreground)] shadow-sm">
+          <div className="rounded-2xl bg-[var(--color-card)] px-4 py-4 text-sm leading-7 text-[var(--color-foreground)] shadow-sm">
             {result?.translatedText ?? dictionary.resultEmpty}
           </div>
         </div>

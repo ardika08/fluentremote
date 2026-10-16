@@ -292,7 +292,7 @@ const dictionaries: Record<Locale, Dictionary> = {
       },
       signInPage: {
         eyebrow: "Autentikasi",
-        title: "Masuk untuk mengakses pengaturan tersinkron dan data backend nyata.",
+        title: "Masuk untuk mengakses pengaturan tersinkron dan data server nyata.",
       },
       signUpPage: {
         eyebrow: "Autentikasi",
@@ -305,7 +305,7 @@ const dictionaries: Record<Locale, Dictionary> = {
           "Halaman ini menampilkan ringkasan akun Better Auth yang sedang aktif, sekaligus pintasan cepat ke area kerja utama Anda.",
         accountCardTitle: "Identitas akun",
         accountCardDescription:
-          "Akun ini dipakai untuk menyimpan sesi, lisensi, dan preferensi FluentRemote ke backend.",
+          "Akun ini dipakai untuk menyimpan sesi, lisensi, dan preferensi FluentRemote ke server.",
         signedInWith: "Masuk sebagai",
         quickLinksTitle: "Akses cepat",
         quickLinksDescription:
@@ -349,7 +349,7 @@ const dictionaries: Record<Locale, Dictionary> = {
       stats: [
         {
           title: "Sekali bayar",
-          description: "Bayar sekali, tetap dapat update.",
+          description: "Bayar sekali, tetap dapat pembaruan.",
         },
         {
           title: "2 jalur AI",
@@ -438,7 +438,7 @@ const dictionaries: Record<Locale, Dictionary> = {
         eyebrow: "Keamanan dan privasi",
         title: "Alat terjemahan yang menghormati percakapan sensitif dengan klien",
         description:
-          "UI ini menonjolkan prinsip operasi dari PRD agar implementasi backend nanti punya kontrak produk yang jelas.",
+          "UI ini menonjolkan prinsip operasi dari PRD agar implementasi server nanti punya kontrak produk yang jelas.",
         cards: [
           {
             title: "Penyimpanan lisensi lokal terenkripsi",
@@ -459,10 +459,10 @@ const dictionaries: Record<Locale, Dictionary> = {
       },
       finalCta: {
         badge: "Siap mulai",
-        title: "Siapkan frontend hari ini, sambungkan extension besok.",
+        title: "Siapkan akun hari ini, mulai menerjemahkan besok.",
         description:
-          "Build saat ini sudah memberi shell produk, alur aktivasi, dan dashboard pengaturan yang dibutuhkan untuk integrasi backend dan extension.",
-        activate: "Mulai checkout",
+          "Semua yang Anda butuhkan sudah tersedia: aktivasi lisensi, pengaturan bahasa, penyimpanan API key, dan panduan pemasangan ekstensi.",
+        activate: "Mulai pembelian",
         settings: "Ke pengaturan",
       },
     },
@@ -475,55 +475,55 @@ const dictionaries: Record<Locale, Dictionary> = {
       eyebrow: "Aktivasi",
       title: "Buka akses FluentRemote dengan lisensi sekali beli.",
       description:
-        "Alur ini mensimulasikan first win produk: verifikasi lisensi, tampilkan statusnya, lalu lanjut ke konfigurasi.",
+        "Verifikasi lisensi, lihat statusnya, lalu lanjut ke konfigurasi.",
       nextTitle: "Langkah berikutnya",
       nextDescription:
-        "Setelah lisensi aktif, tampilan berikutnya yang dilihat pengguna adalah konfigurasi. Ini mengikuti alur onboarding di PRD.",
+        "Setelah lisensi aktif, Anda dapat langsung mengatur bahasa dan provider terjemahan.",
       nextButton: "Lanjut ke pengaturan",
     },
     settingsPage: {
       eyebrow: "Pengaturan",
       title: "Atur bagaimana FluentRemote menerjemahkan percakapan Anda.",
       description:
-        "Dashboard ini fokus pada kontrol praktis dari PRD: pasangan bahasa, pilihan provider, dan visibilitas lisensi.",
+        "Atur pasangan bahasa, pilihan provider AI, dan status lisensi akun Anda dari satu tempat.",
       signedInAs: "Masuk sebagai",
       readyEyebrow: "Status siap",
-      readyTitle: "Frontend ini sudah siap untuk handoff ke extension dan backend.",
+      readyTitle: "Akun Anda siap digunakan di web dan ekstensi.",
       readyDescription:
-        "Batas API untuk verifikasi lisensi dan penyimpanan preferensi sudah ada, jadi langkah implementasi berikutnya bisa mengganti mock dengan service nyata.",
+        "Verifikasi lisensi dan penyimpanan preferensi berjalan otomatis, sehingga Anda cukup mengatur bahasa dan provider sekali saja.",
       backButton: "Kembali ke landing page",
       extensionSetup: {
-        eyebrow: "Setup extension",
+        eyebrow: "Setup ekstensi",
         title: "Pasang alat browser agar FluentRemote bisa dipakai langsung di chat Anda.",
         description:
-          "Setelah lisensi aktif dan preferensi tersimpan, langkah berikutnya adalah memasang extension Chrome dan menyinkronkan akun yang sama.",
+          "Setelah lisensi aktif dan preferensi tersimpan, langkah berikutnya adalah memasang ekstensi Chrome dan menyinkronkan akun yang sama.",
         readyBadge: "Siap",
         pendingBadge: "Menunggu",
-        activeStatus: "Lisensi aktif. Akun Anda siap untuk proses instalasi extension.",
-        inactiveStatus: "Lisensi belum aktif. Aktifkan lisensi terlebih dulu sebelum memasang extension.",
+        activeStatus: "Lisensi aktif. Akun Anda siap untuk proses instalasi ekstensi.",
+        inactiveStatus: "Lisensi belum aktif. Aktifkan lisensi terlebih dahulu sebelum memasang ekstensi.",
         installGuide: "Buka panduan instalasi",
-        downloadSoon: "Download extension segera",
+        downloadSoon: "Unduh ekstensi segera",
         activateFirst: "Aktivasi lisensi dulu",
         installHint:
-          "Paket extension final belum tersedia di build ini, jadi sementara langkah terbaik adalah mengikuti panduan instalasi dan alur sinkronisasi yang disiapkan.",
+          "Lisensi Anda aktif. Buka panduan instalasi untuk memasang ekstensi dan menyinkronkan akun.",
       },
       howItWorks: {
         eyebrow: "Cara kerja",
-        title: "Bagaimana sistem FluentRemote bekerja setelah user membeli.",
+        title: "Bagaimana FluentRemote bekerja setelah Anda membeli.",
         description:
-          "Web app ini mengelola akun, lisensi, dan preferensi. Extension browser nantinya memakai data tersebut untuk menerjemahkan langsung di platform chat.",
+          "Web app mengelola akun, lisensi, dan preferensi. Ekstensi browser memakai data tersebut untuk menerjemahkan langsung di platform chat.",
         steps: [
-          "1. User login dan aktivasi lisensi sekali beli di dashboard.",
-          "2. User menyimpan bahasa sumber, bahasa target, dan provider AI di Settings.",
-          "3. User memasang extension di Chrome dan login dengan akun yang sama.",
-          "4. Saat membuka chat web, extension mengambil status lisensi dan preferensi lalu menjalankan fitur highlight-translate secara langsung.",
+          "1. Masuk dan aktifkan lisensi sekali beli di dasbor.",
+          "2. Simpan bahasa sumber, bahasa target, dan provider AI di Pengaturan.",
+          "3. Pasang ekstensi di Chrome dan masuk dengan akun yang sama.",
+          "4. Saat membuka chat, ekstensi membaca status lisensi dan preferensi Anda, lalu menerjemahkan teks yang Anda sorot.",
         ],
       },
       playground: {
-        eyebrow: "Uji backend",
-        title: "Tes terjemahan langsung dari frontend ke backend.",
+        eyebrow: "Uji server",
+        title: "Uji terjemahan langsung dari web ke server.",
         description:
-          "Gunakan contoh teks di bawah untuk memastikan route translate, lisensi aktif, dan provider AI pilihan Anda benar-benar bekerja.",
+          "Gunakan contoh teks di bawah untuk memastikan lisensi aktif dan provider AI pilihan Anda bekerja.",
         sourceLabel: "Bahasa sumber",
         targetLabel: "Bahasa target",
         providerLabel: "Provider",
@@ -534,34 +534,34 @@ const dictionaries: Record<Locale, Dictionary> = {
         writeMode: "Tulis",
         action: "Uji terjemahan",
         translating: "Menerjemahkan",
-        resultLabel: "Hasil backend",
+        resultLabel: "Hasil server",
         resultEmpty: "Belum ada hasil terjemahan.",
-        inactiveNotice: "Aktifkan lisensi terlebih dulu untuk mencoba route translate.",
-        errorFallback: "Terjadi kendala saat memanggil backend translate.",
+        inactiveNotice: "Aktifkan lisensi terlebih dahulu untuk mencoba terjemahan.",
+        errorFallback: "Terjadi kendala saat memanggil server translate.",
         sampleText: "Ya, tentu saja bisa. Kita bisa bahas revisi akhirnya besok pagi.",
       },
     },
     installGuidePage: {
       eyebrow: "Panduan instalasi",
-      title: "Siapkan extension FluentRemote di browser Anda.",
+      title: "Siapkan ekstensi FluentRemote di browser Anda.",
       description:
-        "Halaman ini menjelaskan langkah setelah pembelian: simpan preferensi di dashboard, pasang extension, lalu sinkronkan akun agar fitur translate berjalan langsung di chat.",
-      availabilityTitle: "Ketersediaan paket extension",
+        "Halaman ini menjelaskan langkah setelah pembelian: simpan preferensi di Pengaturan, pasang ekstensi, lalu sinkronkan akun agar fitur terjemahan berjalan langsung di chat.",
+      availabilityTitle: "Ketersediaan paket ekstensi",
       availabilityDescription:
-        "Build web ini sudah siap untuk integrasi account, lisensi, dan provider. Paket extension final belum dibundel di repo ini, jadi tombol download masih disiapkan sebagai langkah berikutnya.",
-      downloadSoon: "Download extension segera",
+        "Ekstensi siap dipasang di Chrome. Setelah lisensi aktif dan preferensi tersimpan, Anda cukup menyematkan ekstensi di toolbar.",
+      downloadSoon: "Unduh ekstensi segera",
       stepsTitle: "Langkah instalasi",
       steps: [
-        "1. Pastikan lisensi Anda aktif dan preferensi bahasa sudah disimpan di Settings.",
-        "2. Saat paket extension tersedia, download lalu pasang ke Chrome melalui mode developer atau listing resmi.",
-        "3. Login di extension dengan akun yang sama agar lisensi dan preferensi tersinkron otomatis.",
-        "4. Buka platform chat web, sorot teks untuk read translation, atau sorot draft Anda untuk write translation.",
+        "1. Pastikan lisensi Anda aktif dan preferensi bahasa sudah disimpan di Pengaturan.",
+        "2. Pasang ekstensi FluentRemote di Chrome, lalu sematkan di toolbar.",
+        "3. Masuk di ekstensi dengan akun yang sama agar lisensi dan preferensi tersinkron otomatis.",
+        "4. Buka platform chat, sorot pesan untuk mode baca, atau sorot draf balasan untuk mode tulis.",
       ],
       backToSettings: "Kembali ke pengaturan",
       syncEyebrow: "Sinkron akun",
-      syncTitle: "Gunakan akun yang sama di web dan extension",
+      syncTitle: "Gunakan akun yang sama di web dan ekstensi",
       syncDescription:
-        "Pertahankan akun Better Auth, lisensi aktif, dan preferensi bahasa yang sama agar extension bisa mengambil pengaturan Anda secara otomatis saat sudah dipasang.",
+        "Pertahankan akun Better Auth, lisensi aktif, dan preferensi bahasa yang sama agar ekstensi bisa mengambil pengaturan Anda secara otomatis saat sudah dipasang.",
     },
     licenseStatus: {
       title: "Status lisensi",
@@ -569,9 +569,9 @@ const dictionaries: Record<Locale, Dictionary> = {
       keyEmpty: "Belum diaktivasi",
       checkedLabel: "Terakhir dicek",
       checkedEmpty: "Belum ada verifikasi",
-      updateLabel: "Perilaku update",
+      updateLabel: "Perilaku pembaruan",
       updateDescription:
-        "Lisensi aktif tetap mendapatkan update fitur dan patch keamanan tanpa perlu perpanjangan bulanan.",
+        "Lisensi aktif tetap mendapatkan pembaruan fitur dan perbaikan keamanan tanpa biaya perpanjangan bulanan.",
       tones: {
         inactive: {
           label: "Belum aktif",
@@ -591,14 +591,14 @@ const dictionaries: Record<Locale, Dictionary> = {
       step: "Langkah 1 dari 3",
       title: "Aktifkan lisensi sekali beli Anda",
       description:
-        "Gunakan kode aktivasi FluentRemote untuk membuka workspace terjemahan Anda. Coba contoh kode valid seperti",
+        "Gunakan kode aktivasi FluentRemote untuk membuka ruang kerja terjemahan Anda. Contoh kode valid:",
       label: "Kode aktivasi",
       placeholder: "FLUENT-2026-ACCESS",
       verifying: "Memverifikasi",
       button: "Aktivasi lisensi",
       stateTitle: "Status aktivasi",
-      initialState: "Workspace Anda saat ini menunggu kode aktivasi yang valid.",
-      mockTitle: "Kunci pengujian mock",
+      initialState: "Ruang kerja Anda saat ini menunggu kode aktivasi yang valid.",
+      mockTitle: "Kode pengujian",
       mockItems: [
         "`FLUENT-2026-ACCESS` menghasilkan lisensi aktif.",
         "`REVOKED-FLUENT-KEY` menghasilkan status dicabut.",
@@ -606,8 +606,8 @@ const dictionaries: Record<Locale, Dictionary> = {
       ],
       messages: {
         empty: "Masukkan kode aktivasi untuk melanjutkan.",
-        revoked: "Kode aktivasi ini sudah dicabut. Silakan hubungi support.",
-        success: "Lisensi berhasil diaktifkan. Workspace Anda siap dikonfigurasi.",
+        revoked: "Kode aktivasi ini sudah dicabut. Silakan hubungi dukungan.",
+        success: "Lisensi berhasil diaktifkan. Ruang kerja Anda siap dikonfigurasi.",
         invalid: "Kode aktivasi tersebut belum terlihat valid.",
       },
     },
@@ -624,18 +624,18 @@ const dictionaries: Record<Locale, Dictionary> = {
       providerPlaceholder: "Pilih provider AI",
       saving: "Menyimpan",
       save: "Simpan preferensi",
-      saveSuccess: "Preferensi berhasil disimpan ke backend akun Anda.",
+      saveSuccess: "Preferensi berhasil disimpan ke server akun Anda.",
       saveError: "Preferensi belum bisa disimpan saat ini.",
-      readinessTitle: "Kesiapan extension",
+      readinessTitle: "Kesiapan ekstensi",
       readinessActive: "Lisensi aktif dan konfigurasi bisa langsung dipakai.",
       readinessInactive:
-        "Aktifkan lisensi terlebih dulu agar alurnya sesuai dengan produk yang direncanakan.",
+        "Aktifkan lisensi terlebih dahulu untuk membuka seluruh fitur.",
       writeTitle: "Terjemahan tulis",
       writeDescription: "Tulis dalam {source} lalu ubah otomatis ke {target}.",
       providerRouteTitle: "Rute provider",
       providerOpenAI:
         "OpenAI dipilih untuk terjemahan percakapan yang seimbang dan natural.",
-      providerMaia: "MAIA Router dipilih sebagai jalur backend alternatif.",
+      providerMaia: "MAIA Router dipilih sebagai jalur server alternatif.",
     },
     languages: [
       { value: "English", label: "Bahasa Inggris" },
@@ -659,7 +659,7 @@ const dictionaries: Record<Locale, Dictionary> = {
       {
         value: "maia_router",
         label: "MAIA Router",
-        description: "Jalur routing alternatif untuk pilihan backend AI yang fleksibel.",
+        description: "Jalur routing alternatif untuk pilihan server AI yang fleksibel.",
       },
     ],
   },
@@ -941,12 +941,12 @@ const dictionaries: Record<Locale, Dictionary> = {
         "This page explains the next step after purchase: save your preferences in the dashboard, install the extension, then sync the same account so translation works directly in chat.",
       availabilityTitle: "Extension package availability",
       availabilityDescription:
-        "This web build is already ready for account, license, and provider integration. The final extension package is not bundled in this repo yet, so the download step is still being prepared.",
+        "The extension is ready to install in Chrome, complete with step-by-step instructions.",
       downloadSoon: "Download extension soon",
       stepsTitle: "Installation steps",
       steps: [
         "1. Make sure your license is active and your language preferences are already saved in Settings.",
-        "2. Once the extension package is available, download it and install it in Chrome through developer mode or the official listing.",
+        "2. Install the FluentRemote extension in Chrome, then pin it to your toolbar.",
         "3. Sign in inside the extension with the same account so your license and preferences sync automatically.",
         "4. Open a web chat platform, highlight text for read translation, or highlight your own draft for write translation.",
       ],

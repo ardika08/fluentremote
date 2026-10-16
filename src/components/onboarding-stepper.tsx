@@ -17,10 +17,10 @@ export function OnboardingStepper({ currentStep, steps }: OnboardingStepperProps
           <div
             key={step.title}
             className={cn(
-              "rounded-[24px] border px-5 py-4 transition",
-              isActive && "border-[var(--color-primary)] bg-white shadow-lg",
-              isComplete && "border-emerald-200 bg-emerald-50",
-              !isActive && !isComplete && "border-[var(--color-border)] bg-white/70",
+              "rounded-[16px] border px-5 py-4 transition",
+              isActive && "border-[var(--color-primary)] bg-[var(--color-surface-strong)] shadow-[var(--glow-primary)]",
+              isComplete && "border-emerald-500/30 bg-emerald-500/10",
+              !isActive && !isComplete && "border-[var(--color-border)] bg-[var(--color-card)]",
             )}
           >
             <div className="flex items-center gap-3">

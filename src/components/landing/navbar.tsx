@@ -48,7 +48,7 @@ export function LandingNavbar() {
     <>
       {/* Scroll progress bar */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-blue-500 to-cyan-400 z-[60] origin-left"
+        className="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-violet-500 to-fuchsia-400 z-[60] origin-left"
         style={{ scaleX }}
       />
 
@@ -63,10 +63,10 @@ export function LandingNavbar() {
           <div className="flex h-16 items-center justify-between">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2 flex-shrink-0">
-              <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-400">
+              <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-violet-500 to-fuchsia-400">
                 <Zap className="w-5 h-5 text-white" aria-hidden="true" />
               </div>
-              <span className="text-xl font-bold bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">
+              <span className="text-xl font-bold bg-gradient-to-r from-violet-400 to-fuchsia-300 bg-clip-text text-transparent">
                 FluentRemote
               </span>
             </Link>
@@ -92,9 +92,9 @@ export function LandingNavbar() {
               <Button
                 asChild
                 size="sm"
-                className="bg-gradient-to-r from-blue-500 to-cyan-400 hover:from-blue-600 hover:to-cyan-500 text-white border-0"
+                className="bg-gradient-to-r from-violet-500 to-fuchsia-400 hover:from-violet-600 hover:to-fuchsia-500 text-white border-0"
               >
-                <Link href="/checkout">Beli Sekarang</Link>
+                <Link href="/checkout">Beli Lisensi</Link>
               </Button>
             </div>
 
@@ -134,9 +134,9 @@ export function LandingNavbar() {
                   </Button>
                   <Button
                     asChild
-                    className="w-full bg-gradient-to-r from-blue-500 to-cyan-400 hover:from-blue-600 hover:to-cyan-500 text-white border-0"
+                    className="w-full bg-gradient-to-r from-violet-500 to-fuchsia-400 hover:from-violet-600 hover:to-fuchsia-500 text-white border-0"
                   >
-                    <Link href="/checkout" onClick={() => setMobileOpen(false)}>Beli Sekarang</Link>
+                    <Link href="/checkout" onClick={() => setMobileOpen(false)}>Beli Lisensi</Link>
                   </Button>
                 </div>
               </div>

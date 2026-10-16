@@ -173,7 +173,7 @@ export function AuthForm({ mode, dictionary }: AuthFormProps) {
   }
 
   return (
-    <Card className="w-full max-w-xl bg-white/88">
+    <Card className="w-full max-w-xl bg-[var(--color-card)]">
       <CardHeader>
         <CardTitle>{isSignUp ? dictionary.signUpTitle : dictionary.signInTitle}</CardTitle>
         <CardDescription>
@@ -264,13 +264,13 @@ export function AuthForm({ mode, dictionary }: AuthFormProps) {
         </form>
 
         {error ? (
-          <div className="rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-900">
+          <div className="rounded-2xl border border-rose-500/30 bg-rose-500/10 px-4 py-3 text-sm text-rose-400">
             {error}
           </div>
         ) : null}
 
         {success ? (
-          <div className="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-900">
+          <div className="rounded-2xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-400">
             {success}
           </div>
         ) : null}

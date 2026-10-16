@@ -32,11 +32,11 @@ type LicenseStatusCardProps = {
 
 const toneClasses = {
   inactive:
-    "border-amber-200 bg-amber-100/80 text-amber-900 shadow-[0_8px_30px_rgba(217,119,6,0.12)]",
+    "border-amber-500/30 bg-amber-500/10 text-amber-300 shadow-[0_8px_30px_rgba(217,119,6,0.12)]",
   active:
-    "border-emerald-200 bg-emerald-100/80 text-emerald-900 shadow-[0_8px_30px_rgba(5,150,105,0.12)]",
+    "border-emerald-500/30 bg-emerald-500/10 text-emerald-400 shadow-[0_8px_30px_rgba(5,150,105,0.12)]",
   revoked:
-    "border-rose-200 bg-rose-100/80 text-rose-900 shadow-[0_8px_30px_rgba(225,29,72,0.12)]",
+    "border-rose-500/30 bg-rose-500/10 text-rose-400 shadow-[0_8px_30px_rgba(225,29,72,0.12)]",
 } as const;
 
 function maskVisibleLicenseKey(value: string | null | undefined) {
@@ -75,13 +75,13 @@ export function LicenseStatusCard({
     <Card
       className={
         hasCopyableKey
-          ? "border-emerald-200/80 bg-[linear-gradient(180deg,_rgba(255,255,255,0.96)_0%,_rgba(241,253,248,0.94)_100%)] shadow-[0_24px_55px_rgba(5,150,105,0.12)]"
-          : "bg-white/82"
+          ? "border-emerald-500/30 bg-[linear-gradient(180deg,rgba(28,25,39,0.92),rgba(21,19,29,0.96))] shadow-[0_24px_55px_rgba(5,150,105,0.12)]"
+          : "bg-[var(--color-card)]"
       }
     >
       <CardHeader className="gap-4">
         {hasCopyableKey ? (
-          <div className="inline-flex w-fit items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-emerald-800 shadow-sm">
+          <div className="inline-flex w-fit items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-emerald-400 shadow-sm">
             <span className="inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500 shadow-[0_0_0_4px_rgba(16,185,129,0.14)]" />
             {locale === "id" ? "Pembayaran terkonfirmasi" : "Payment confirmed"}
           </div>
@@ -98,7 +98,7 @@ export function LicenseStatusCard({
         <div
           className={
             hasCopyableKey
-              ? "relative overflow-hidden rounded-[28px] border border-emerald-200 bg-[linear-gradient(135deg,_rgba(236,253,245,0.95)_0%,_rgba(239,246,255,0.92)_100%)] p-5 shadow-[0_18px_40px_rgba(5,150,105,0.10)]"
+              ? "relative overflow-hidden rounded-[18px] border border-emerald-500/30 bg-[linear-gradient(135deg,rgba(6,78,59,0.40),rgba(21,19,29,0.92))] p-5 shadow-[0_18px_40px_rgba(5,150,105,0.10)]"
               : "rounded-2xl bg-[var(--color-surface)] p-4"
           }
         >
@@ -112,9 +112,9 @@ export function LicenseStatusCard({
                 {dictionary.keyLabel}
               </div>
               {hasCopyableKey ? (
-                <div className="mt-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-emerald-700">
+                <div className="mt-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-emerald-400">
                   {locale === "id"
-                    ? "Siap untuk aktivasi extension"
+                    ? "Siap untuk aktivasi ekstensi"
                     : "Ready for extension activation"}
                 </div>
               ) : null}
@@ -126,9 +126,9 @@ export function LicenseStatusCard({
                   size="sm"
                   type="button"
                   onClick={() => setIsVisible((current) => !current)}
-                  className="relative h-9 w-9 border border-emerald-200/80 bg-white/85 p-0 shadow-sm transition hover:-translate-y-0.5 hover:bg-white"
-                  aria-label={isVisible ? "Hide license key" : "Show license key"}
-                  title={isVisible ? "Hide license key" : "Show license key"}
+                  className="relative h-9 w-9 border border-emerald-500/30 bg-[var(--color-card)] p-0 shadow-sm transition hover:-translate-y-0.5 hover:bg-[var(--color-surface-strong)]"
+                  aria-label={isVisible ? "Sembunyikan kode lisensi" : "Tampilkan kode lisensi"}
+                  title={isVisible ? "Sembunyikan kode lisensi" : "Tampilkan kode lisensi"}
                 >
                   {isVisible ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </Button>
@@ -138,7 +138,7 @@ export function LicenseStatusCard({
                   variant="ghost"
                   size="sm"
                   onClick={handleCopy}
-                  className="relative border border-emerald-200/80 bg-white/85 shadow-sm transition hover:-translate-y-0.5 hover:bg-white"
+                  className="relative border border-emerald-500/30 bg-[var(--color-card)] shadow-sm transition hover:-translate-y-0.5 hover:bg-[var(--color-surface-strong)]"
                 >
                   {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
                   {copied ? dictionary.copiedLabel : dictionary.copyLabel}
@@ -149,7 +149,7 @@ export function LicenseStatusCard({
           <div
             className={`break-all ${
               hasCopyableKey
-                ? "relative rounded-2xl border border-white/70 bg-white/90 px-4 py-4 font-mono text-lg font-semibold tracking-[0.18em] text-[var(--color-foreground)] shadow-sm"
+                ? "relative rounded-2xl border border-white/70 bg-[var(--color-card)] px-4 py-4 font-mono text-lg font-semibold tracking-[0.18em] text-[var(--color-foreground)] shadow-sm"
                 : "text-sm text-[var(--color-muted-foreground)]"
             }`}
           >
@@ -162,7 +162,7 @@ export function LicenseStatusCard({
           {hasCopyableKey ? (
             <p className="mt-3 text-sm leading-6 text-[var(--color-muted-foreground)]">
               {locale === "id"
-                ? "Copy license key ini, lalu paste ke extension FluentRemote saat aktivasi pertama di browser Anda."
+                ? "Salin kode lisensi ini, lalu tempelkan ke ekstensi FluentRemote saat aktivasi pertama di browser Anda."
                 : "Copy this license key, then paste it into the FluentRemote extension during the first activation in your browser."}
             </p>
           ) : null}
@@ -185,7 +185,7 @@ export function LicenseStatusCard({
           </div>
         </div>
         <div
-          className={`rounded-2xl border border-dashed border-[var(--color-border)] bg-white/60 p-4 ${
+          className={`rounded-2xl border border-dashed border-[var(--color-border)] bg-[var(--color-card)] p-4 ${
             hasCopyableKey ? "" : "sm:col-span-2"
           }`}
         >

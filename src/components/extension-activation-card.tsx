@@ -31,8 +31,8 @@ export function ExtensionActivationCard({
     <Card
       className={
         hasPurchased
-          ? "border-emerald-200/80 bg-[linear-gradient(180deg,_rgba(255,255,255,0.98)_0%,_rgba(241,253,248,0.94)_100%)] shadow-[0_24px_55px_rgba(5,150,105,0.12)]"
-          : "border-amber-200 bg-[linear-gradient(180deg,_rgba(255,251,235,0.96)_0%,_rgba(255,255,255,0.92)_100%)]"
+          ? "border-emerald-500/30 bg-[linear-gradient(180deg,rgba(28,25,39,0.92),rgba(21,19,29,0.96))] shadow-[0_24px_55px_rgba(5,150,105,0.12)]"
+          : "border-amber-500/30 bg-[linear-gradient(180deg,rgba(120,53,15,0.30),rgba(21,19,29,0.92))]"
       }
     >
       <CardHeader className="gap-4">
@@ -40,14 +40,14 @@ export function ExtensionActivationCard({
           {hasPurchased ? (
             <KeyRound className="h-4 w-4" />
           ) : (
-            <LockKeyhole className="h-4 w-4 text-amber-700" />
+            <LockKeyhole className="h-4 w-4 text-amber-300" />
           )}
-          {isId ? "Aktivasi extension" : "Extension activation"}
+          {isId ? "Aktivasi ekstensi" : "Extension activation"}
         </div>
         <CardTitle>
           {hasPurchased
             ? isId
-              ? "Copy license key ini untuk aktivasi pertama di extension."
+              ? "Salin kode lisensi ini untuk aktivasi pertama di ekstensi."
               : "Copy this license key for the first activation inside the extension."
             : isId
               ? "License key akan muncul di sini setelah pembayaran sukses."
@@ -56,23 +56,23 @@ export function ExtensionActivationCard({
         <CardDescription>
           {hasPurchased
             ? isId
-              ? "Setelah extension dipasang, paste key ini saat prompt aktivasi pertama muncul di browser."
+              ? "Setelah ekstensi terpasang, tempel kode ini saat layar aktivasi pertama muncul di browser."
               : "Once the extension is installed, paste this key when the first activation prompt appears in your browser."
             : isId
-              ? "Selesaikan checkout dulu agar FluentRemote dapat menerbitkan license key unik ke akun Anda."
+              ? "Selesaikan pembelian agar FluentRemote dapat menerbitkan kode lisensi unik untuk akun Anda."
               : "Complete checkout first so FluentRemote can issue a unique license key to your account."}
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         <div
-          className={`rounded-[28px] border px-5 py-5 ${
+          className={`rounded-[18px] border px-5 py-5 ${
             hasPurchased
-              ? "border-emerald-200 bg-white/92 shadow-sm"
-              : "border-amber-200 bg-white/70"
+              ? "border-emerald-500/30 bg-[var(--color-card)] shadow-sm"
+              : "border-amber-500/30 bg-[var(--color-card)]"
           }`}
         >
           <div className="mb-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-[var(--color-muted-foreground)]">
-            {isId ? "License key" : "License key"}
+            {isId ? "Kode lisensi" : "License key"}
           </div>
           <div
             className={`break-all font-mono ${
@@ -98,16 +98,16 @@ export function ExtensionActivationCard({
               ? "Tersalin"
               : "Copied"
             : isId
-              ? "Copy license key"
+              ? "Salin kode lisensi"
               : "Copy license key"}
         </Button>
 
         <div className="grid gap-3">
           {(isId
             ? [
-                "1. Install extension FluentRemote di Chrome begitu paketnya tersedia.",
-                "2. Saat layar aktivasi pertama muncul, paste license key dari dashboard ini.",
-                "3. Login dengan akun yang sama agar provider key dan preferensi bahasa tersinkron.",
+                "1. Pasang ekstensi FluentRemote di Chrome, lalu sematkan di toolbar.",
+                "2. Saat layar aktivasi muncul, tempel kode lisensi dari halaman ini.",
+                "3. Masuk dengan akun yang sama agar API key dan preferensi bahasa tersinkron.",
               ]
             : [
                 "1. Install the FluentRemote extension in Chrome once the package is available.",
@@ -117,7 +117,7 @@ export function ExtensionActivationCard({
           ).map((step) => (
             <div
               key={step}
-              className="rounded-2xl border border-[var(--color-border)] bg-white/70 px-4 py-4 text-sm leading-7 text-[var(--color-muted-foreground)]"
+              className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)] px-4 py-4 text-sm leading-7 text-[var(--color-muted-foreground)]"
             >
               {step}
             </div>

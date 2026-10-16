@@ -47,7 +47,7 @@ export default async function CheckoutSuccessPage() {
 
   return (
     <main className="mx-auto flex w-full max-w-4xl flex-1 flex-col gap-8 px-6 py-12 lg:px-10">
-      <Card className="bg-white/88">
+      <Card className="bg-[var(--color-card)]">
         <CardHeader className="gap-4">
           <div className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.18em] text-[var(--color-primary)]">
             {snapshot?.hasPurchased ? (

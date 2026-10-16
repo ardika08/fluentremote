@@ -27,9 +27,10 @@ export default function RootLayout({
   return (
     <html
       lang="id"
+      data-scroll-behavior="smooth"
       className={`${manrope.variable} ${spaceGrotesk.variable} h-full scroll-smooth antialiased`}
     >
-      <body className="min-h-full bg-slate-950 text-gray-100">
+      <body className="min-h-full bg-[var(--color-background)] text-[var(--color-foreground)]">
         {children}
       </body>
     </html>

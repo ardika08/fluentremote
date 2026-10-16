@@ -10,11 +10,11 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-[var(--color-primary)] px-5 py-3 text-white shadow-[0_14px_40px_rgba(15,98,254,0.25)] hover:-translate-y-0.5 hover:bg-[var(--color-primary-strong)] focus-visible:ring-[var(--color-primary)]",
+          "bg-[var(--color-primary)] px-5 py-3 text-white shadow-[0_14px_40px_rgba(124,58,237,0.25)] hover:-translate-y-0.5 hover:bg-[var(--color-primary-strong)] focus-visible:ring-[var(--color-primary)]",
         secondary:
-          "border border-[var(--color-border)] bg-white/80 px-5 py-3 text-[var(--color-foreground)] hover:bg-white focus-visible:ring-[var(--color-primary)]",
+          "border border-[var(--color-border)] bg-[var(--color-card)] px-5 py-3 text-[var(--color-foreground)] hover:bg-[var(--color-surface-strong)] focus-visible:ring-[var(--color-primary)]",
         ghost:
-          "px-4 py-2 text-[var(--color-muted-foreground)] hover:bg-white/70 hover:text-[var(--color-foreground)] focus-visible:ring-[var(--color-primary)]",
+          "px-4 py-2 text-[var(--color-muted-foreground)] hover:bg-[var(--color-card)] hover:text-[var(--color-foreground)] focus-visible:ring-[var(--color-primary)]",
       },
       size: {
         default: "h-11",
