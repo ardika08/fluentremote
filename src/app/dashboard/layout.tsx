@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 
 import { DashboardShell, type DashboardLabels } from "@/components/dashboard/dashboard-shell";
-import { getServerSession } from "@/lib/auth-server";
+import { getServerSession, isAdminEmail } from "@/lib/auth-server";
 import { getLocale } from "@/lib/i18n-server";
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
@@ -20,6 +20,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
     translation: isId ? "Terjemahan" : "Translation",
     extension: isId ? "Ekstensi" : "Extension",
     account: isId ? "Akun" : "Account",
+    members: isId ? "Member" : "Members",
     backToSite: isId ? "Lihat situs" : "View site",
     signOut: isId ? "Keluar" : "Sign out",
     signingOut: isId ? "Keluar..." : "Signing out...",
@@ -30,6 +31,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
     <DashboardShell
       user={{ name: session.user.name ?? "", email: session.user.email ?? "" }}
       labels={labels}
+      showAdmin={isAdminEmail(session.user.email)}
     >
       {children}
     </DashboardShell>

@@ -13,6 +13,7 @@ import {
   Menu,
   Puzzle,
   UserRound,
+  Users,
   X,
 } from "lucide-react";
 
@@ -26,6 +27,7 @@ export type DashboardLabels = {
   translation: string;
   extension: string;
   account: string;
+  members: string;
   backToSite: string;
   signOut: string;
   signingOut: string;
@@ -40,6 +42,9 @@ const NAV = [
   { href: "/dashboard/akun", labelKey: "account", icon: UserRound },
 ] as const;
 
+/** Menu admin — hanya dirender kalau email ada di ADMIN_EMAILS. */
+const ADMIN_NAV = { href: "/dashboard/member", labelKey: "members", icon: Users } as const;
+
 function initials(name: string, email: string) {
   const tokens = name.trim().split(/\s+/).filter(Boolean).slice(0, 2);
   if (tokens.length) return tokens.map((t) => t[0]?.toUpperCase() ?? "").join("");
@@ -49,10 +54,12 @@ function initials(name: string, email: string) {
 export function DashboardShell({
   user,
   labels,
+  showAdmin = false,
   children,
 }: {
   user: { name: string; email: string };
   labels: DashboardLabels;
+  showAdmin?: boolean;
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
@@ -72,9 +79,11 @@ export function DashboardShell({
     });
   }
 
+  const navItems = showAdmin ? [...NAV, ADMIN_NAV] : NAV;
+
   const navList = (
     <nav className="flex flex-col gap-1">
-      {NAV.map((item) => {
+      {navItems.map((item) => {
         const Icon = item.icon;
         const active = isActive(item.href);
         return (
